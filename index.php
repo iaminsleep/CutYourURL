@@ -1,5 +1,6 @@
 <?php
 	if(isset($_GET['url']) && !empty($_GET['url'])) {
+		/* массив $_GET заполняется извне (через поисковую строку) */
 		$url = strtolower(trim($_GET['url']));
 		$link = get_link_info($url);
 
@@ -9,7 +10,7 @@
 		};
 
 		upd_link_views($url);
-		header('Location: '. $link['long_link']);
+		header('Location: ' . $link['long_link']);
 		die;
 	}
 

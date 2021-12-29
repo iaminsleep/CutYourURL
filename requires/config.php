@@ -9,3 +9,6 @@
 
   const DB_USER = 'root';
   const DB_PASS = 'phpuser420';
+
+  /* важная команда, благодаря ней стартует сессия и туда можно записывать данные */
+  session_start();
