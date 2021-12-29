@@ -1,18 +1,19 @@
-<?php include 'includes/header.php' ?>
 <?php
-if(isset($_GET['url']) && !empty($_GET['url'])) {
+	if(isset($_GET['url']) && !empty($_GET['url'])) {
+		$url = strtolower(trim($_GET['url']));
+		$link = get_link_info($url);
 
-	$url = strtolower(trim($_GET['url']));
-	$link = db_query("SELECT * FROM `links` WHERE `short_link` = '$url';")->fetch();/* просто fetch, потому что мы всё равно получим только одну строку */
-	if(empty($link)) {
-		header('Location: 404.php');
+		if(empty($link)) {
+			header('Location: 404.php');
+			die;
+		};
+
+		upd_link_views($url);
+		header('Location: '. $link['long_link']);
 		die;
-	};
+	}
 
-	db_exec("UPDATE `links` SET `views` = `views` + 1 WHERE `short_link` = '$url';");
-	header('Location: '. $link['long_link']);
-	die;
-}
+	include 'includes/header.php';
 ?>
 
 	<main class="container">

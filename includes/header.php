@@ -1,10 +1,10 @@
 <?php 
-require_once 'requires/functions.php';
+	require_once 'requires/functions.php';
 
-/* db->query() = statement (данные в бинарном виде), а fetchColumn() превращает данные в массив И берёт данные (число) сразу из столбца */
-$usersCount = db_query("SELECT COUNT(id) FROM `users`;")->fetchColumn(); 
-$linksCount = db_query("SELECT COUNT(id) FROM `links`;")->fetchColumn(); 
-$viewsCount = db_query("SELECT SUM(`views`) FROM `links`;")->fetchColumn(); 
+	/* db->query() = statement (данные в бинарном виде), а fetchColumn() превращает данные в массив И берёт данные (число) сразу из столбца */
+	$usersCount = get_user_count();
+	$linksCount = get_links_count();
+	$viewsCount = get_links_views();
 ?>
 
 <!doctype html>
@@ -15,6 +15,7 @@ $viewsCount = db_query("SELECT SUM(`views`) FROM `links`;")->fetchColumn();
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+	<link rel="icon" type="image/png" href="img/icons/favicon.png">
 	<title><?php echo SITE_NAME; ?></title>
 </head>
 <body>
