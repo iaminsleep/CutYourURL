@@ -1,4 +1,6 @@
 <?php
+	include 'includes/header.php';
+
 	if(isset($_GET['url']) && !empty($_GET['url'])) {
 		/* массив $_GET заполняется извне (через поисковую строку) */
 		$url = strtolower(trim($_GET['url']));
@@ -13,8 +15,6 @@
 		header('Location: ' . $link['long_link']);
 		die;
 	}
-
-	include 'includes/header.php';
 ?>
 	<main class="container">
 		<div class="row mt-5">

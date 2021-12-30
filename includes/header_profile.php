@@ -1,4 +1,4 @@
-<?php require_once '/requires/functions.php'; ?>
+<?php require_once 'requires/functions.php'; ?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -8,13 +8,13 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-	<title>Cut your URL</title>
+	<title><?php echo SITE_NAME; ?></title>
 </head>
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">Cut your URL</a>
+				<a class="navbar-brand" href="<?php echo get_url();?>"><?php echo SITE_NAME; ?></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -33,7 +33,11 @@
 					</form>
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<a href="login.html" class="btn btn-primary">Выйти</a>
+							<?php if($isAuth) { ?>
+								<a href="<?php echo get_url('logout.php');?>" class="btn btn-primary">Выйти</a>
+							<?php } else { ?>
+								<a href="<?php echo get_url('login.php');?>" class="btn btn-primary">Войти</a>
+							<?php } ?>
 						</li>
 					</ul>
 				</div>

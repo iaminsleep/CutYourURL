@@ -83,6 +83,8 @@ function upd_link_views($url) {
 *****************************************************
 *****************************************************/
 
+$isAuth = isset($_SESSION['user']['id']);
+
 function get_user_info($login) { //данные получают из метода GET
   if(empty($login)) return [];
   /* просто fetch, потому что мы всё равно получим только одну строку */
@@ -140,6 +142,7 @@ function login_user($authData) {
   }
 
   if(password_verify($authData['password'], $user['password'])) {
+    $_SESSION['user'] = $user;
     header('Location: profile.php');
     die;
   } else {
