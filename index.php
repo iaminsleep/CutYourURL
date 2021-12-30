@@ -7,8 +7,7 @@
 		$link = get_link_info($url);
 
 		if(empty($link)) {
-			header('Location: 404.php');
-			die;
+			redirect('404.php');
 		};
 
 		upd_link_views($url);
@@ -18,9 +17,11 @@
 ?>
 	<main class="container">
 		<div class="row mt-5">
-			<div class="col">
-				<h2 class="text-center">Необходимо <a href="<?php echo get_url("register.php");?>">зарегистрироваться</a> или <a href="<?php echo get_url('login.php');?>">войти</a> под своей учетной записью</h2>
-			</div>
+			<?php if(!$isAuth): ?>
+				<div class="col">
+					<h2 class="text-center">Необходимо <a href="<?php echo get_url("register.php");?>">зарегистрироваться</a> или <a href="<?php echo get_url('login.php');?>">войти</a> под своей учетной записью</h2>
+				</div>
+			<?php endif; ?>
 		</div>
 		<div class="row mt-5">
 			<div class="col">

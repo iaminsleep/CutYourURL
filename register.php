@@ -1,19 +1,10 @@
 <?php 
 	include 'includes/header.php'; 
 
-	$error = '';
-
-	if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-		$error = $_SESSION['error'];
-		$_SESSION['error'] = '';
-	}
-
-	$success = '';
-
-	if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-		$success = $_SESSION['success'];
-		$_SESSION['success'] = '';
-	}
+	if($isAuth) redirect();
+	
+	$errorMessage = get_error_message();
+	$successMessage = get_success_message();
 
 	if(isset($_POST['login']) && !empty($_POST['login'])) {
 		/* массив $_POST заполняется также извне (через формы) */
@@ -21,15 +12,15 @@
 	}
 ?>
 	<main class="container">
-		<?php if (!empty($success)) { ?>
+		<?php if (!empty($successMessage)) { ?>
 			<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-					<?php echo $success ?>
+					<?php echo $successMessage ?>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		<?php } ?>
-		<?php if (!empty($error)) { ?>
+		<?php if (!empty($errorMessage)) { ?>
 			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-					<?php echo $error ?>
+					<?php echo $errorMessage ?>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		<?php } ?>
