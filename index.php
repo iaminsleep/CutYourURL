@@ -16,7 +16,6 @@
 
 	include 'includes/header.php';
 ?>
-
 	<main class="container">
 		<div class="row mt-5">
 			<div class="col">

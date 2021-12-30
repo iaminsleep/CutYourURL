@@ -8,19 +8,28 @@
 		$_SESSION['error'] = '';
 	}
 
+	$success = '';
+
+	if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+		$success = $_SESSION['success'];
+		$_SESSION['success'] = '';
+	}
+
 	if(isset($_POST['login']) && !empty($_POST['login'])) {
 		/* массив $_POST заполняется также извне (через формы) */
 		register_user($_POST);
 	}
 ?>
 	<main class="container">
-		<!-- <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-			Все ок
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div> -->
+		<?php if (!empty($success)) { ?>
+			<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+					<?php echo $success ?>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		<?php } ?>
 		<?php if (!empty($error)) { ?>
 			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-				<?php echo $error ?>
+					<?php echo $error ?>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		<?php } ?>

@@ -90,8 +90,9 @@ function get_user_info($login) { //данные получают из метод
 }
 
 function add_user($login, $password) {
+  $securedPassword = password_hash($password, PASSWORD_DEFAULT);
   //напоминание, true нужен т.к это exec функция
-  return db_query("INSERT INTO `users` (`id`, `login`, `password`) VALUES (NULL, '$login', '$password');", true); 
+  return db_query("INSERT INTO `users` (`id`, `login`, `password`) VALUES (NULL, '$login', '$securedPassword');", true); 
 }
 
 function register_user($authData) {
@@ -113,5 +114,37 @@ function register_user($authData) {
     die;
   }
 
-  add_user($authData['login'], $authData['password']);
+  if(add_user($authData['login'], $authData['password'])) {
+    $_SESSION['success'] = 'Регистрация прошла успешно';
+    header('Location: login.php');
+    die;
+  }
+}
+
+  /****************************************************
+  *****************************************************
+  **************Вход пользователя в систему************
+  *****************************************************
+  *****************************************************/
+
+function login_user($authData) {
+  if(empty($authData) || !isset($authData['login']) || empty($authData['login'])
+    || !isset($authData['password']) || empty($authData['password']))
+  $_SESSION['error'] = 'Логин или пароль не может быть пустым';
+
+  $user = get_user_info($authData['login']);
+  if(empty($user)) {
+    $_SESSION['error'] = 'Пользователь '.$authData['login'].' не найден в системе';
+    header('Location: login.php');
+    die;
+  }
+
+  if(password_verify($authData['password'], $user['password'])) {
+    header('Location: profile.php');
+    die;
+  } else {
+    $_SESSION['error'] = 'Пароль введён неправильно';
+    header('Location: login.php');
+    die;
+  }
 }
