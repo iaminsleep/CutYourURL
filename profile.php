@@ -1,13 +1,31 @@
-<?php include 'includes/header_profile.php';?>
+<?php 
+	include 'includes/header_profile.php';
+
+	$error = '';
+	if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+		$error = $_SESSION['error'];
+		$_SESSION['error'] = '';
+	}
+
+	$success = '';
+	if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+		$success = $_SESSION['success'];
+		$_SESSION['success'] = '';
+	}
+?>
 	<main class="container">
-		<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-			Все ок
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-		<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-			А тут не ок
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
+		<?php if (!empty($success)) { ?>
+			<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+					<?php echo $success ?>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		<?php } ?>
+		<?php if (!empty($error)) { ?>
+			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+					<?php echo $error ?>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		<?php } ?>
 		<div class="row mt-5">
 			<table class="table table-striped">
 				<thead>
