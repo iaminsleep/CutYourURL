@@ -21,10 +21,10 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="index.html">Главная</a>
+							<a class="nav-link" aria-current="page" href="<?php echo get_url('index.php');?>">Главная</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="profile.html">Профиль</a>
+							<a class="nav-link active" href="<?php echo get_url('profile.php');?>">Профиль</a>
 						</li>
 					</ul>
 					<form class="d-flex">
@@ -33,11 +33,7 @@
 					</form>
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<?php if($isAuth) { ?>
-								<a href="<?php echo get_url('logout.php');?>" class="btn btn-primary">Выйти</a>
-							<?php } else { ?>
-								<a href="<?php echo get_url('login.php');?>" class="btn btn-primary">Войти</a>
-							<?php } ?>
+							<a href="<?php echo get_url('logout.php');?>" class="btn btn-primary">Выйти</a>
 						</li>
 					</ul>
 				</div>

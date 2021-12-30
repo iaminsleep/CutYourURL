@@ -42,6 +42,12 @@ function db_query($sql = '', $exec = false) {
   return $statement;
 }
 
+//функция редиректа, которая значительно облегчает верстку
+function redirect($location = '') {
+    header("Location: ".get_url($location)); //если значение пустое, перекидывает на главную страницу
+    die;
+}
+
 /****************************************************
 *****************************************************
 ************Получение основной информации************
@@ -79,17 +85,41 @@ function upd_link_views($url) {
 
 /****************************************************
 *****************************************************
-***************Регистрация пользователя**************
+******Вспомогательные функции для аутентификации*****
 *****************************************************
 *****************************************************/
 
-$isAuth = isset($_SESSION['user']['id']);
+function get_error_message() {
+  $error = '';
+
+	if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+		$error = $_SESSION['error'];
+		$_SESSION['error'] = '';
+    return $error;
+	}
+}
+
+function get_success_message() {
+	$success = '';
+
+	if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+		$success = $_SESSION['success'];
+		$_SESSION['success'] = '';
+    return $success;
+	}
+}
 
 function get_user_info($login) { //данные получают из метода GET
   if(empty($login)) return [];
   /* просто fetch, потому что мы всё равно получим только одну строку */
   return db_query("SELECT * FROM `users` WHERE `login` = '$login';")->fetch();
 }
+
+/****************************************************
+*****************************************************
+***************Регистрация пользователя**************
+*****************************************************
+*****************************************************/
 
 function add_user($login, $password) {
   $securedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -106,28 +136,27 @@ function register_user($authData) {
   $user = get_user_info($authData['login']);
   if(!empty($user)) {
     $_SESSION['error'] = 'Пользователь '.$authData['login'].' уже существует!';
-    header('Location: register.php');
-    die;
+    redirect('register.php');
   }
 
   if($authData['password'] !== $authData['password-confirm']) {
     $_SESSION['error'] = 'Пароли не совпадают';
-    header('Location: register.php');
-    die;
+    redirect('register.php');
   }
 
   if(add_user($authData['login'], $authData['password'])) {
     $_SESSION['success'] = 'Регистрация прошла успешно';
-    header('Location: login.php');
-    die;
+    redirect('login.php');
   }
 }
 
-  /****************************************************
-  *****************************************************
-  **************Вход пользователя в систему************
-  *****************************************************
-  *****************************************************/
+/****************************************************
+*****************************************************
+**************Вход пользователя в систему************
+*****************************************************
+*****************************************************/
+
+$isAuth = isset($_SESSION['user']['id']);
 
 function login_user($authData) {
   if(empty($authData) || !isset($authData['login']) || empty($authData['login'])
@@ -137,17 +166,14 @@ function login_user($authData) {
   $user = get_user_info($authData['login']);
   if(empty($user)) {
     $_SESSION['error'] = 'Пользователь '.$authData['login'].' не найден в системе';
-    header('Location: login.php');
-    die;
+    redirect('login.php');
   }
 
   if(password_verify($authData['password'], $user['password'])) {
     $_SESSION['user'] = $user;
-    header('Location: profile.php');
-    die;
+    redirect('profile.php');
   } else {
     $_SESSION['error'] = 'Пароль введён неправильно';
-    header('Location: login.php');
-    die;
+    redirect('login.php');
   }
 }
