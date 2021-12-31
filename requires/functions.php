@@ -145,7 +145,7 @@ function register_user($authData) {
   }
 
   if(add_user($authData['login'], $authData['password'])) {
-    $_SESSION['success'] = 'Регистрация прошла успешно!';
+    $_SESSION['success'] = 'Регистрация прошла успешно.';
     redirect('login.php');
   }
 }
@@ -157,6 +157,7 @@ function register_user($authData) {
 *****************************************************/
 
 $isAuth = isset($_SESSION['user']['id']);
+$userName = $_SESSION['user']['login'];
 
 function login_user($authData) {
   if(empty($authData) || !isset($authData['login']) || empty($authData['login'])
@@ -194,7 +195,7 @@ function delete_link($linkId) {
   if(empty($linkId)) return false;
 
   else if (db_query("DELETE FROM `links` WHERE `links`.`id` = $linkId AND `user_id` = '".$_SESSION['user']['id']."'", true)) {
-    $_SESSION['success'] = 'Ссылка успешно удалена!';
+    $_SESSION['success'] = 'Ссылка успешно удалена.';
   } else {
     $_SESSION['error'] = 'Произошла ошибка при удалении ссылки!';
   }
@@ -207,7 +208,13 @@ function generate_link($size = 6) {
 }
 
 function add_link($userId, $link) {
-  $shortLink = generate_link();
-  return db_query("INSERT INTO `links` (`id`, `user_id`, `long_link`, `short_link`, `views`) 
-  VALUES (NULL, '$userId', '$link', '$shortLink', '0');", true);
+  if($userId == $_SESSION['user']['id']) {
+    $shortLink = generate_link();
+    $_SESSION['success'] = 'Ссылка успешно добавлена.';
+    return db_query("INSERT INTO `links` (`id`, `user_id`, `long_link`, `short_link`, `views`) 
+    VALUES (NULL, '$userId', '$link', '$shortLink', '0');", true);
+  } 
+  else {
+    $_SESSION['error'] = 'Произошла ошибка при добавлении ссылки!';
+  }
 }

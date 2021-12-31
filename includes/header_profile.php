@@ -15,6 +15,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
+				<img src="img/icons/favicon.png" width="30" height="30" alt="Cut Your URL logo" style="margin-right: 10px;">
 				<a class="navbar-brand" href="<?php echo get_url();?>"><?php echo SITE_NAME; ?></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -34,8 +35,11 @@
 						<button class="btn btn-success" type="submit"><i class="bi bi-plus-lg"></i></button>
 					</form>
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						<?php if($isAuth): ?>
+							<span style="display: flex; align-items: center; padding-right: 10px;">Здравствуйте, <?php echo $userName ?></span>
+						<?php endif; ?>
 						<li class="nav-item">
-							<a href="<?php echo get_url('logout.php');?>" class="btn btn-primary">Выйти</a>
+							<a href="<?php echo get_url('actions/logout.php');?>" class="btn btn-primary">Выйти</a>
 						</li>
 					</ul>
 				</div>

@@ -33,7 +33,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($links as $index => $link): ?> <!-- Такой мув позволяет выводить порядковый индекс ссылки, т.к id ссылок бывает разным -->
+					<?php if(empty($links)) { ?>
+						<p>Здесь пока что пусто. Создайте свою первую ссылку!</p>
+					<?php } else { foreach ($links as $index => $link): ?> <!-- Такой мув позволяет выводить порядковый индекс ссылки, т.к id ссылок бывает разным -->
 						<tr>
 							<th scope="row"><?php echo $index + 1?></th> <!-- +1 нужен т.к элементы в массиве начинаются с нуля -->
 							<td><a href="<?php echo $link['long_link']?>" target="_blank"><?php echo $link['long_link']?></a></td>
@@ -45,7 +47,7 @@
 								<a href="<?php echo get_url('actions/delete_link.php?id='.$link['id'])?>" class="btn btn-danger btn-sm" title="Удалить"><i class="bi bi-trash"></i></a>
 							</td>
 						</tr>
-					<?php endforeach; ?>
+					<?php endforeach; }?>
 				</tbody>
 			</table>
 		</div>
