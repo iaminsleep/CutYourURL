@@ -8,6 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<link rel="icon" type="image/png" href="img/icons/favicon.png">
 	<title><?php echo SITE_NAME; ?></title>
 </head>
 <body>

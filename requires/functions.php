@@ -1,6 +1,6 @@
 <?php
 
-require_once('requires/config.php');
+require_once('config.php');
 
 /****************************************************
 *****************************************************
@@ -140,12 +140,12 @@ function register_user($authData) {
   }
 
   if($authData['password'] !== $authData['password-confirm']) {
-    $_SESSION['error'] = 'Пароли не совпадают';
+    $_SESSION['error'] = 'Пароли не совпадают!';
     redirect('register.php');
   }
 
   if(add_user($authData['login'], $authData['password'])) {
-    $_SESSION['success'] = 'Регистрация прошла успешно';
+    $_SESSION['success'] = 'Регистрация прошла успешно!';
     redirect('login.php');
   }
 }
@@ -161,11 +161,11 @@ $isAuth = isset($_SESSION['user']['id']);
 function login_user($authData) {
   if(empty($authData) || !isset($authData['login']) || empty($authData['login'])
     || !isset($authData['password']) || empty($authData['password']))
-  $_SESSION['error'] = 'Логин или пароль не может быть пустым';
+  $_SESSION['error'] = 'Логин или пароль не может быть пустым!';
 
   $user = get_user_info($authData['login']);
   if(empty($user)) {
-    $_SESSION['error'] = 'Пользователь '.$authData['login'].' не найден в системе';
+    $_SESSION['error'] = 'Пользователь '.$authData['login'].' не найден в системе!';
     redirect('login.php');
   }
 
@@ -173,7 +173,31 @@ function login_user($authData) {
     $_SESSION['user'] = $user;
     redirect('profile.php');
   } else {
-    $_SESSION['error'] = 'Пароль введён неправильно';
+    $_SESSION['error'] = 'Пароль введён неправильно!';
     redirect('login.php');
   }
+}
+
+/****************************************************
+*****************************************************
+******************Работа с ссылками******************
+*****************************************************
+*****************************************************/
+
+function get_user_links($userId) {
+  if(empty($userId)) return [];
+  
+  return db_query("SELECT * FROM `links` WHERE `user_id` = $userId;")->fetchAll();
+}
+
+function delete_link($linkId) {
+  if(empty($linkId)) return false;
+
+  else if (db_query("DELETE FROM `links` WHERE `links`.`id` = $linkId AND `user_id` = '".$_SESSION['user']['id']."'", true)) {
+    $_SESSION['success'] = 'Ссылка успешно удалена!';
+  } else {
+    $_SESSION['error'] = 'Произошла ошибка при удалении ссылки!';
+  }
+  
+  redirect('profile.php');
 }
