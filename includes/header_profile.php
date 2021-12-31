@@ -28,8 +28,9 @@
 							<a class="nav-link active" href="<?php echo get_url('profile.php');?>">Профиль</a>
 						</li>
 					</ul>
-					<form class="d-flex">
-						<input class="form-control me-2" type="text" placeholder="Ссылка" aria-label="Ссылка">
+					<form class="d-flex" action="../actions/add_link.php" method="post">
+						<input type="hidden" value="<?php echo $_SESSION['user']['id'];?>" name="user-id"> <!-- позволяет передать id, чтобы никому не было видно -->
+						<input class="form-control me-2" type="text" placeholder="Ссылка" aria-label="Ссылка" name="link">
 						<button class="btn btn-success" type="submit"><i class="bi bi-plus-lg"></i></button>
 					</form>
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">

@@ -198,6 +198,16 @@ function delete_link($linkId) {
   } else {
     $_SESSION['error'] = 'Произошла ошибка при удалении ссылки!';
   }
-  
-  redirect('profile.php');
+}
+
+function generate_link($size = 6) {
+  $new_string = str_shuffle(URL_CHARS);
+  $cut_string = substr($new_string, 0, $size);
+  return $cut_string;
+}
+
+function add_link($userId, $link) {
+  $shortLink = generate_link();
+  return db_query("INSERT INTO `links` (`id`, `user_id`, `long_link`, `short_link`, `views`) 
+  VALUES (NULL, '$userId', '$link', '$shortLink', '0');", true);
 }

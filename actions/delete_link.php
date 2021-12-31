@@ -11,4 +11,6 @@
   else {
     delete_link($_GET['id']);
   }
+
+  redirect('profile.php');
   
