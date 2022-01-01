@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const toastText = myToastEl.querySelector('.toast-body');
 
   clipboard.on('success', (e) => {
-    toastText.textContent = `Ссылка '${e.text}' скопирована в буфер`;
+    toastText.textContent = `Ссылка '${e.text}' скопирована в буфер обмена`;
 
     const myToast = new bootstrap.Toast(myToastEl);
     myToast.show();

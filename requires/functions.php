@@ -189,7 +189,7 @@ function login($authData) {
 
 /****************************************************
 *****************************************************
-******************Работа с ссылками******************
+*************Работа с ссылками в профиле*************
 *****************************************************
 *****************************************************/
 
@@ -202,20 +202,20 @@ function get_user_links($userId) {
 function delete_link($linkId) {
   if(empty($linkId)) return false;
 
-  else if (db_query("DELETE FROM `links` WHERE `links`.`id` = $linkId AND `user_id` = '".$_SESSION['user']['id']."'", true)) {
+  if (db_query("DELETE FROM `links` WHERE `links`.`id` = $linkId AND `user_id` = '".$_SESSION['user']['id']."'", true)) {
     $_SESSION['success'] = 'Ссылка успешно удалена.';
   } else {
-    $_SESSION['error'] = 'Произошла ошибка при удалении ссылки!';
+    $_SESSION['error'] = 'Произошла ошибка';
   }
 }
 
 /* Два вида генерации ссылок, первый вариант генерирует без повторения букв, что делает ссылку менее уникальной */
 
-// function generate_link($size = 10) {
-//   $new_string = str_shuffle(URL_CHARS);
-//   $cut_string = substr($new_string, 0, $size);
-//   return $cut_string;
-// }
+function generate_link($size = 10) {
+  $new_string = str_shuffle(URL_CHARS);
+  $cut_string = substr($new_string, 0, $size);
+  return $cut_string;
+}
 
 /* Усложнённый вариант, ссылки будут более уникальными из-за возможности повторения букв */
 function generate_link_complex($size = 10) {
@@ -232,11 +232,19 @@ function generate_link_complex($size = 10) {
 function add_link($userId, $link) {
   if($userId == $_SESSION['user']['id']) {
     $shortLink = generate_link_complex();
+
     $_SESSION['success'] = 'Ссылка успешно добавлена.';
     return db_query("INSERT INTO `links` (`id`, `user_id`, `long_link`, `short_link`, `views`) 
     VALUES (NULL, '$userId', '$link', '$shortLink', '0');", true);
   } 
   else {
-    $_SESSION['error'] = 'Произошла ошибка при добавлении ссылки!';
+    $_SESSION['error'] = 'Произошла ошибка';
   }
+}
+
+function edit_link($linkId, $modifiedLink) {
+  if(empty($linkId) || empty($modifiedLink)) return false;
+
+  $_SESSION['success'] = 'Ссылка успешно отредактирована.';
+  return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = $linkId;");
 }
