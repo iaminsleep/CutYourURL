@@ -1,12 +1,4 @@
-<?php 
-	require_once 'requires/functions.php';
-
-	/* db->query() = statement (данные в бинарном виде), а fetchColumn() превращает данные в массив И берёт данные (число) сразу из столбца */
-	$usersCount = get_user_count();
-	$linksCount = get_links_count();
-	$viewsCount = get_links_views();
-?>
-
+<?php require_once 'requires/functions.php';?>
 <!doctype html>
 <html lang="ru">
 <head>

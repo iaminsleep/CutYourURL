@@ -6,7 +6,7 @@
 
   //второй способ
   const DB_HOST = '127.0.0.1';
-  const DB_NAME = 'cut_url';
+  const DB_NAME = 'cut_your_url';
 
   const DB_USER = 'root';
   const DB_PASS = 'phpuser420';

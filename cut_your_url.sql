@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Дек 28 2021 г., 20:37
--- Версия сервера: 5.7.33
--- Версия PHP: 7.4.21
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jan 01, 2022 at 09:47 PM
+-- Server version: 5.7.33
+-- PHP Version: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `cut_url`
+-- Database: `cut_your_url`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `links`
+-- Table structure for table `links`
 --
 
 CREATE TABLE `links` (
@@ -35,64 +35,51 @@ CREATE TABLE `links` (
   `views` int(11) NOT NULL DEFAULT '0' COMMENT 'просмотры ссылки'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `links`
---
-
-INSERT INTO `links` (`id`, `user_id`, `long_link`, `short_link`, `views`) VALUES
-(1, 1, 'https://yandex.ru/', 'ads', 0);
-
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL COMMENT 'ID пользователя',
   `login` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL
+  `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id`, `login`, `password`) VALUES
-(1, 'testuser', 'testuser');
-
---
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `links`
+-- Indexes for table `links`
 --
 ALTER TABLE `links`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `short_link` (`short_link`);
 
 --
--- Индексы таблицы `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `login` (`login`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `links`
+-- AUTO_INCREMENT for table `links`
 --
 ALTER TABLE `links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id ссылки', AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id ссылки', AUTO_INCREMENT=68;
 
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID пользователя', AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID пользователя', AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

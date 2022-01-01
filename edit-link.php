@@ -16,10 +16,7 @@
   include ('includes/header_profile.php');
 ?>
 <main class="container">
-		<?php 
-			show_messages($successMessage, 'success');
-			show_messages($errorMessage);
-		?>
+		<?php show_alert_messages($errorMessage, $successMessage); ?>
 		<div class="row mt-5">
 			<div class="col">
 				<h2 class="text-center">Редактирование ссылки</h2>

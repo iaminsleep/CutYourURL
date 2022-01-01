@@ -11,10 +11,7 @@
 	include_once 'includes/header_profile.php';
 ?>
 	<main class="container">
-		<?php 
-			show_messages($successMessage, 'success');
-			show_messages($errorMessage);
-		?>
+		<?php show_alert_messages($errorMessage, $successMessage); ?>
 		<div class="row mt-5">
 			<table class="table table-striped">
 				<thead>
@@ -32,8 +29,8 @@
 					<?php } else { foreach ($links as $index => $link): ?> <!-- Такой мув позволяет выводить порядковый индекс ссылки, т.к id ссылок бывает разным -->
 						<tr>
 							<th scope="row"><?php echo $index + 1?></th> <!-- +1 нужен т.к элементы в массиве начинаются с нуля -->
-							<td><a href="<?php echo $link['long_link']?>" target="_blank"><?php echo $link['long_link']?></a></td>
-							<td class="short-link"><?php echo get_url($link['short_link'])?></td>
+							<td><?php echo $link['long_link']?></td>
+							<td class="short-link"><a href="<?php echo $link['short_link']?>" target="_blank"><?php echo get_url($link['short_link'])?></a></td>
 							<td><?php echo $link['views']?></td>
 							<td>
 								<button class="btn btn-primary btn-sm copy-btn" title="Скопировать в буфер" data-clipboard-text="<?php echo get_url($link['short_link'])?>"><i class="bi bi-files"></i></button>

@@ -109,10 +109,14 @@ function get_messages($type) {
   }
 }
 
-function show_messages($message, $type = 'danger') {
-  if (!empty($message)) {
-		echo '<div class="alert alert-'.$type.' alert-dismissible fade show mt-3" role="alert">'.$message.
-    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+function show_alert_messages($errorMessage, $successMessage) {
+  if (!empty($errorMessage)) {
+		echo '<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">'.$errorMessage.
+         '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+  }
+  else if (!empty($successMessage)) {
+		echo '<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">'.$successMessage.
+         '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
   }
 }
 
@@ -210,7 +214,6 @@ function delete_link($linkId) {
 }
 
 /* Два вида генерации ссылок, первый вариант генерирует без повторения букв, что делает ссылку менее уникальной */
-
 function generate_link($size = 10) {
   $new_string = str_shuffle(URL_CHARS);
   $cut_string = substr($new_string, 0, $size);
