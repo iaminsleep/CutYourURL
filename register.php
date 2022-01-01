@@ -1,29 +1,23 @@
 <?php 
-	include 'includes/header.php'; 
+	require_once 'requires/functions.php'; 
 
-	if($isAuth) redirect();
+	if($isAuth) redirect('profile.php');
 	
-	$errorMessage = get_error_message();
-	$successMessage = get_success_message();
+	$errorMessage = get_messages('error');
+	$successMessage = get_messages('success');
 
 	if(isset($_POST['login']) && !empty($_POST['login'])) {
 		/* массив $_POST заполняется также извне (через формы) */
 		register_user($_POST);
 	}
+
+	include_once 'includes/header.php'; 
 ?>
 	<main class="container">
-		<?php if (!empty($successMessage)) { ?>
-			<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-					<?php echo $successMessage ?>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		<?php } ?>
-		<?php if (!empty($errorMessage)) { ?>
-			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-					<?php echo $errorMessage ?>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		<?php } ?>
+		<?php 
+			show_messages($successMessage, 'success');
+			show_messages($errorMessage);
+		?>
 		<div class="row mt-5">
 			<div class="col">
 				<h2 class="text-center">Регистрация</h2>
@@ -35,17 +29,17 @@
 				<form action="" method="post">
 					<div class="mb-3">
 						<label for="login-input" class="form-label">Логин</label>
-						<input type="text" class="form-control is-valid" id="login-input" name="login" required>
+						<input type="text" class="form-control is-valid" id="login-input" autocomplete="off" name="login" required>
 						<div class="valid-feedback">Все ок</div>
 					</div>
 					<div class="mb-3">
 						<label for="password-input" class="form-label">Пароль</label>
-						<input type="password" class="form-control is-invalid" id="password-input" name="password" required>
+						<input type="password" class="form-control is-invalid" id="password-input" autocomplete="off" name="password" required>
 						<div class="invalid-feedback">А тут не ок</div>
 					</div>
 					<div class="mb-3">
 						<label for="password-input2" class="form-label">Пароль еще раз</label>
-						<input type="password" class="form-control is-invalid" id="password-input2" name="password-confirm" required>
+						<input type="password" class="form-control is-invalid" id="password-input2" autocomplete="off" name="password-confirm" required>
 						<div class="invalid-feedback">И тут тоже не ок</div>
 					</div>
 					<button type="submit" class="btn btn-primary">Зарегистрироваться</button>

@@ -1,26 +1,20 @@
 <?php 
-	include 'includes/header_profile.php';
+	require_once 'requires/functions.php';
 
 	if(!$isAuth) redirect();
 
-	$errorMessage = get_error_message();
-	$successMessage = get_success_message();
+	$errorMessage = get_messages('error');
+	$successMessage = get_messages('success');
 
 	$links = get_user_links($_SESSION['user']['id']);
+
+	include_once 'includes/header_profile.php';
 ?>
 	<main class="container">
-		<?php if (!empty($successMessage)) { ?>
-			<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-					<?php echo $successMessage ?>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		<?php } ?>
-		<?php if (!empty($errorMessage)) { ?>
-			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-					<?php echo $errorMessage ?>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		<?php } ?>
+		<?php 
+			show_messages($successMessage, 'success');
+			show_messages($errorMessage);
+		?>
 		<div class="row mt-5">
 			<table class="table table-striped">
 				<thead>

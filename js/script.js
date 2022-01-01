@@ -11,4 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     e.clearSelection();
   });
+
+  const addLinkInput = document.querySelector('input[name="link"]');
+  addLinkInput.onclick = () => {
+    addLinkInput.value = 'https://';
+  }
 });

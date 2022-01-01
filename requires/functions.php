@@ -89,24 +89,31 @@ function upd_link_views($url) {
 *****************************************************
 *****************************************************/
 
-function get_error_message() {
-  $error = '';
+function get_messages($type) {
+  if($type === 'error') {
+    $error = '';
+    if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+      $error = $_SESSION['error'];
+      $_SESSION['error'] = '';
+      return $error;
+    }
+  }
 
-	if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-		$error = $_SESSION['error'];
-		$_SESSION['error'] = '';
-    return $error;
-	}
+  else if($type === 'success') {
+    $success = '';
+    if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+      $success = $_SESSION['success'];
+      $_SESSION['success'] = '';
+      return $success;
+    }
+  }
 }
 
-function get_success_message() {
-	$success = '';
-
-	if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-		$success = $_SESSION['success'];
-		$_SESSION['success'] = '';
-    return $success;
-	}
+function show_messages($message, $type = 'danger') {
+  if (!empty($message)) {
+		echo '<div class="alert alert-'.$type.' alert-dismissible fade show mt-3" role="alert">'.$message.
+    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+  }
 }
 
 function get_user_info($login) { //данные получают из метода GET
@@ -159,19 +166,20 @@ function register_user($authData) {
 $isAuth = isset($_SESSION['user']['id']);
 $userName = $_SESSION['user']['login'];
 
-function login_user($authData) {
+function login($authData) {
   if(empty($authData) || !isset($authData['login']) || empty($authData['login'])
     || !isset($authData['password']) || empty($authData['password']))
   $_SESSION['error'] = 'Логин или пароль не может быть пустым!';
 
   $user = get_user_info($authData['login']);
   if(empty($user)) {
-    $_SESSION['error'] = 'Пользователь '.$authData['login'].' не найден в системе!';
+    $_SESSION['error'] = 'Пользователь '.$authData['login'].' не был найден в системе!';
     redirect('login.php');
   }
 
   if(password_verify($authData['password'], $user['password'])) {
     $_SESSION['user'] = $user;
+    $_SESSION['success'] = 'Вы успешно вошли в систему.';
     redirect('profile.php');
   } else {
     $_SESSION['error'] = 'Пароль введён неправильно!';

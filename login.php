@@ -1,29 +1,23 @@
 <?php 
-	include('includes/header.php');
+	require_once 'requires/functions.php';
 
-	if($isAuth) redirect();
+	if($isAuth) redirect('profile.php');
 
-	$errorMessage = get_error_message();
-	$successMessage = get_success_message();
-	
 	if(isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['password']) && !empty($_POST['password'])) {
 		/* массив $_POST заполняется также извне (через формы) */
-		login_user($_POST);
+		login($_POST);
 	}
+
+	$errorMessage = get_messages('error');
+	$successMessage = get_messages('success');
+
+	include_once('includes/header.php');
 ?>
 	<main class="container">
-		<?php if (!empty($successMessage)) { ?>
-			<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-					<?php echo $successMessage ?>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		<?php } ?>
-		<?php if (!empty($errorMessage)) { ?>
-			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-					<?php echo $errorMessage ?>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		<?php } ?>
+		<?php 
+			show_messages($successMessage, 'success');
+			show_messages($errorMessage);
+		?>
 		<div class="row mt-5">
 			<div class="col">
 				<h2 class="text-center">Вход в личный кабинет</h2>
@@ -35,11 +29,11 @@
 				<form action="" method="post">
 					<div class="mb-3">
 						<label for="login-input" class="form-label">Логин</label>
-						<input type="text" class="form-control is-valid" id="login-input" required name="login">
+						<input type="text" class="form-control is-valid" id="login-input" required autocomplete="off" name="login">
 					</div>
 					<div class="mb-3">
 						<label for="password-input" class="form-label">Пароль</label>
-						<input type="password" class="form-control is-invalid" id="password-input" required name="password">
+						<input type="password" class="form-control is-invalid" id="password-input" autocomplete="off" required name="password">
 					</div>
 					<button type="submit" class="btn btn-primary">Войти</button>
 				</form>

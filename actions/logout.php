@@ -1,4 +1,7 @@
 <?php
-  require_once('../requires/config.php');
+  require_once('../requires/functions.php');
+  
+  if(!$isAuth) redirect();
+
   session_destroy();
-  header('Location: ../index.php');
+  redirect();
