@@ -209,15 +209,29 @@ function delete_link($linkId) {
   }
 }
 
-function generate_link($size = 6) {
-  $new_string = str_shuffle(URL_CHARS);
-  $cut_string = substr($new_string, 0, $size);
-  return $cut_string;
+/* Два вида генерации ссылок, первый вариант генерирует без повторения букв, что делает ссылку менее уникальной */
+
+// function generate_link($size = 10) {
+//   $new_string = str_shuffle(URL_CHARS);
+//   $cut_string = substr($new_string, 0, $size);
+//   return $cut_string;
+// }
+
+/* Усложнённый вариант, ссылки будут более уникальными из-за возможности повторения букв */
+function generate_link_complex($size = 10) {
+  $new_string = '';
+  
+  for($i = 0; $i < $size; $i++) {
+    $char = substr(URL_CHARS, rand(0, strlen(URL_CHARS)) , 1);
+    $new_string .= $char;
+  }
+
+  return $new_string;
 }
 
 function add_link($userId, $link) {
   if($userId == $_SESSION['user']['id']) {
-    $shortLink = generate_link();
+    $shortLink = generate_link_complex();
     $_SESSION['success'] = 'Ссылка успешно добавлена.';
     return db_query("INSERT INTO `links` (`id`, `user_id`, `long_link`, `short_link`, `views`) 
     VALUES (NULL, '$userId', '$link', '$shortLink', '0');", true);

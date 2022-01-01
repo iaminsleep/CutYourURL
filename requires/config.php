@@ -2,7 +2,7 @@
   //первый способ обявления переменных
   define ('SITE_NAME', "Cut Your URL");
   define ('HOST', "http://" . $_SERVER['HTTP_HOST']);
-  define ('URL_CHARS', "abcdefghijklmnopqrstuvwxyz0123456789-");
+  define ('URL_CHARS', "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-");
 
   //второй способ
   const DB_HOST = '127.0.0.1';
