@@ -21,12 +21,17 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="<?php echo get_url('index.php');?>">Главная</a>
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 30px;">
+						<li class="nav-item" style="padding-right: 10px;">
+							<a class="nav-link active" aria-current="page" href="<?php echo get_url();?>">Главная</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link active" href="<?php echo get_url('profile.php');?>">Профиль</a>
+						<?php if($isAuth): ?>
+							<li class="nav-item" style="padding-right: 10px;">
+								<a class="nav-link active" href="<?php echo get_url('profile.php');?>">Профиль</a>
+							</li>
+						<?php endif; ?>
+						<li class="nav-item" style="padding-right: 10px;">
+							<a class="nav-link active" aria-current="page" href="<?php echo get_url('top.php');?>">Топ пользователей</a>
 						</li>
 					</ul>
 					<form class="d-flex" action="../actions/add_link.php" method="post">

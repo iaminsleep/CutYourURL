@@ -20,15 +20,18 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 30px;">
+						<li class="nav-item" style="padding-right: 10px;">
 							<a class="nav-link active" aria-current="page" href="<?php echo get_url();?>">Главная</a>
 						</li>
 						<?php if($isAuth): ?>
-							<li class="nav-item">
+							<li class="nav-item" style="padding-right: 10px;">
 								<a class="nav-link active" href="<?php echo get_url('profile.php');?>">Профиль</a>
 							</li>
 						<?php endif; ?>
+						<li class="nav-item" style="padding-right: 10px;">
+							<a class="nav-link active" aria-current="page" href="<?php echo get_url('top.php');?>">Топ пользователей</a>
+						</li>
 					</ul>
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 						<?php if($isAuth): ?>

@@ -63,7 +63,13 @@ function get_links_count() {
 }
 
 function get_links_views() {
-  return db_query("SELECT SUM(`views`) FROM `links`;")->fetchColumn(); 
+  $viewsCount = db_query("SELECT SUM(`views`) FROM `links`;")->fetchColumn(); 
+  if(empty($viewsCount)) {
+    return 0;
+  }
+  else {
+    return $viewsCount;
+  }
 }
 
 /****************************************************
@@ -81,6 +87,7 @@ function get_link_info($url) { //данные получают из метода
 function upd_link_views($url) {
   if(empty($url)) return false;
   db_query("UPDATE `links` SET `views` = `views` + 1 WHERE `short_link` = '$url';", true);
+  db_query("UPDATE `users` SET `total_views` = `total_views` + 1;", true);
 }
 
 /****************************************************
@@ -250,4 +257,28 @@ function edit_link($linkId, $modifiedLink) {
 
   $_SESSION['success'] = 'Ссылка успешно отредактирована.';
   return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = $linkId;");
+}
+
+/****************************************************
+*****************************************************
+******************Топ пользователей******************
+*****************************************************
+*****************************************************/
+
+function get_users() {
+  return db_query("SELECT * FROM `users` ORDER BY `users`.`total_views` DESC")->fetchAll();
+}
+
+function get_users_links_count($userId) {
+  return db_query("SELECT COUNT(id) FROM `links` WHERE `user_id` = $userId;")->fetchColumn(); 
+}
+
+function get_users_views_count($userId) {
+  $viewsCount = db_query("SELECT `total_views` FROM `users` WHERE `id` = $userId;")->fetchColumn(); 
+  if(empty($viewsCount)) {
+    return 0;
+  }
+  else {
+    return $viewsCount;
+  }
 }
