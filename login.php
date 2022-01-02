@@ -26,15 +26,18 @@
 				<form action="" method="post">
 					<div class="mb-3">
 						<label for="login-input" class="form-label">Логин</label>
-						<input type="text" class="form-control is-valid" id="login-input" required autocomplete="off" name="login">
+						<input type="text" class="form-control" id="login-input" required autocomplete="off" name="login">
+						<div class=""></div>
 					</div>
 					<div class="mb-3">
 						<label for="password-input" class="form-label">Пароль</label>
-						<input type="password" class="form-control is-invalid" id="password-input" autocomplete="off" required name="password">
+						<input type="password" class="form-control" id="password-input" autocomplete="off" required name="password">
+						<div class=""></div>
 					</div>
 					<button type="submit" class="btn btn-primary">Войти</button>
 				</form>
 			</div>
 		</div>
 	</main>
+<?php include 'includes/input.php'; ?>
 <?php include 'includes/footer.php'; ?>

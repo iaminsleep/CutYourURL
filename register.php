@@ -26,22 +26,23 @@
 				<form action="" method="post">
 					<div class="mb-3">
 						<label for="login-input" class="form-label">Логин</label>
-						<input type="text" class="form-control is-valid" id="login-input" autocomplete="off" name="login" required>
-						<div class="valid-feedback">Все ок</div>
+						<input type="text" class="form-control" id="login-input" autocomplete="off" name="login" required>
+						<div class=""></div>
 					</div>
 					<div class="mb-3">
 						<label for="password-input" class="form-label">Пароль</label>
-						<input type="password" class="form-control is-invalid" id="password-input" autocomplete="off" name="password" required>
-						<div class="invalid-feedback">А тут не ок</div>
+						<input type="password" class="form-control" id="password-input" autocomplete="off" name="password" required>
+						<div class=""></div>
 					</div>
 					<div class="mb-3">
 						<label for="password-input2" class="form-label">Пароль еще раз</label>
-						<input type="password" class="form-control is-invalid" id="password-input2" autocomplete="off" name="password-confirm" required>
-						<div class="invalid-feedback">И тут тоже не ок</div>
+						<input type="password" class="form-control" id="password-input2" autocomplete="off" name="password-confirm" required>
+						<div class=""></div>
 					</div>
 					<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
 				</form>
 			</div>
 		</div>
 	</main>
+<?php include 'includes/input.php'; ?>
 <?php include 'includes/footer.php'; ?>
