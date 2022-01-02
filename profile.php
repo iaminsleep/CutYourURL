@@ -8,10 +8,29 @@
 
 	$links = get_user_links($_SESSION['user']['id']);
 
+	$user = db_query("SELECT * FROM `users` WHERE `id` = '".$_SESSION['user']['id']."'")->fetch();
+
+	$avatar = get_user_avatar($_SESSION['user']['id']);
+
 	include_once 'includes/header_profile.php';
 ?>
 	<main class="container">
 		<?php show_alert_messages($errorMessage, $successMessage); ?>
+		<div style="margin-top: 30px; display: flex; flex-direction: row;">
+			<div>
+				<?php if(file_exists("img/avatars/".$avatar)): ?>
+					<img src="img/avatars/<?php echo $avatar?>" width="256" height="256" alt="Аватар пользователя <?php echo $user['login']?>">
+				<?php else: ?>
+					<img src="img/avatars/noavatar.png" width="256" height="256" alt="noavatar">
+				<?php endif; ?>
+				<form action="actions/upload_avatar.php" method="post" enctype="multipart/form-data" style="margin-top: 10px; display: flex; flex-direction: column">
+					<input type="file" name="avatar">
+					<button type="submit" name="set_avatar" class="btn btn-primary" style="margin-top: 10px;
+    margin-right: 150px;">Загрузить аватар</button>
+				</form>
+			</div>
+			<h3><?php echo $user['login']?></h3>
+		</div>
 		<div class="row mt-5">
 			<table class="table table-striped">
 				<thead>

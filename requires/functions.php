@@ -282,3 +282,36 @@ function get_users_views_count($userId) {
     return $viewsCount;
   }
 }
+
+/****************************************************
+*****************************************************
+*************Работа с аватаром пользователя**********
+*****************************************************
+*****************************************************/
+
+function get_user_avatar($userId) {
+  return db_query("SELECT `avatar` FROM `users` WHERE `id` = $userId")->fetchColumn();
+}
+
+function delete_avatar($currentAvatar) {
+  if(file_exists("../img/avatars/noavatar")) {
+    exit();
+  }
+  else if(file_exists("../img/avatars/".$currentAvatar)) {
+    unlink("../img/avatars/".$currentAvatar);
+  }
+}
+
+function upload_avatar($userId, $file) {
+  $type = $file['type'];
+  $name = md5(microtime()).'.'.substr($type, strlen("image/"));
+  $dir = '../img/avatars/';
+  $fullPath = $dir.$name;
+
+  if(move_uploaded_file($file['tmp_name'], $fullPath) && db_query("UPDATE `users` SET `avatar` = '".$name."' WHERE `users`.`id` = $userId;", true)) {
+    $_SESSION['success'] = "Аватар успешно загружен";
+  }
+  else {
+    $_SESSION['error'] = "Ошибка при загрузке аватара";
+  }
+}

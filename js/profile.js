@@ -16,4 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
   addLinkInput.onclick = () => {
     addLinkInput.value = 'https://';
   }
+
+  const fileInput = document.querySelector('input[type="file"]');
+  const uploadAvatarBtn = document.querySelector('button[name="set_avatar"]');
+  uploadAvatarBtn.onclick = () => {
+    if(fileInput.value === '') {
+      return false;
+    }
+  }
 });
