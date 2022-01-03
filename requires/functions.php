@@ -293,9 +293,10 @@ function get_user_avatar($userId) {
 }
 
 function delete_avatar($currentAvatar) {
-  if(file_exists("../img/avatars/".$currentAvatar) && $currentAvatar !== 'noavatar.png') {
+  if($currentAvatar !== 'noavatar.png' && file_exists("../img/avatars/".$currentAvatar)) {
     unlink("../img/avatars/".$currentAvatar);
   }
+  db_query("UPDATE `users` SET `avatar` = 'noavatar.png' WHERE `users`.`id` = '".$_SESSION['user']['id']."'", true);
 }
 
 function upload_avatar($userId, $file) {

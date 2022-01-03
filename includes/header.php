@@ -7,8 +7,8 @@
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/style-fix.css">
 	<link rel="icon" type="image/png" href="img/icons/favicon.png">
+	<link rel="stylesheet" href="../css/style-fix.css">
 	<title><?php echo SITE_NAME; ?></title>
 </head>
 <body style="background: #121212; color: #FFFFFF">

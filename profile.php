@@ -19,11 +19,14 @@
 		<div style="margin-top: 30px; display: flex; flex-direction: row;">
 			<div>
 				<?php if(file_exists("img/avatars/".$avatar)): ?>
-					<img src="img/avatars/<?php echo $avatar?>" width="256" height="256" alt="Аватар пользователя <?php echo $user['login']?>">
+					<form action="actions/delete_avatar.php" method="post">
+						<img src="img/avatars/<?php echo $avatar?>" width="256" height="256" style="position: absolute;" alt="Аватар пользователя <?php echo $user['login']?>">
+						<button class="btn-close" type="submit" name="delete_avatar" style="position: absolute; margin-left: 230px;"></button>
+					</form>
 				<?php else: ?>
-					<img src="img/avatars/noavatar.png" width="256" height="256" alt="noavatar">
+					<img src="img/avatars/noavatar.png" width="256" height="256" alt="noavatar" style="position: absolute;">
 				<?php endif; ?>
-				<form action="actions/upload_avatar.php" method="post" enctype="multipart/form-data" style="margin-top: 50px; display: flex; flex-direction: column">
+				<form action="actions/upload_avatar.php" method="post" enctype="multipart/form-data" style="margin-top: 300px; display: flex; flex-direction: column">
 					<input type="file" name="avatar">
 					<button type="submit" name="set_avatar" class="btn btn-primary" style="margin-top: 10px;
     margin-right: 150px;">Загрузить аватар</button>
