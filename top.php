@@ -19,11 +19,15 @@
 				<tbody>
 					<?php if(empty($users)) { ?>
 						<p>Ещё никто не зарегистрировался на нашем сайте. Станьте первым!</p>
-					<?php } else { foreach ($users as $index => $user): ?>
+					<?php } else { foreach ($users as $index => $user): 
+						$avatar = get_user_avatar($user['id']);
+						if(!file_exists("img/avatars/$avatar"))
+							$avatar = 'noavatar.png';
+					?>
 						<tr>
 							<th scope="row"><?php echo $index + 1?></th>
 							<td>
-								<img src="img/avatars/<?php echo get_user_avatar($user['id']);?>" width="32" height="32" alt="avatar" style="margin-right: 5px;">
+								<img src="img/avatars/<?php echo $avatar?>" width="32" height="32" alt="avatar" style="margin-right: 5px;">
 								<?php echo $user['login']?>
 							</td>
 							<td><?php echo get_users_links_count($user['id'])?></td>
