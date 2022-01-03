@@ -23,7 +23,7 @@
 				<?php else: ?>
 					<img src="img/avatars/noavatar.png" width="256" height="256" alt="noavatar">
 				<?php endif; ?>
-				<form action="actions/upload_avatar.php" method="post" enctype="multipart/form-data" style="margin-top: 10px; display: flex; flex-direction: column">
+				<form action="actions/upload_avatar.php" method="post" enctype="multipart/form-data" style="margin-top: 50px; display: flex; flex-direction: column">
 					<input type="file" name="avatar">
 					<button type="submit" name="set_avatar" class="btn btn-primary" style="margin-top: 10px;
     margin-right: 150px;">Загрузить аватар</button>

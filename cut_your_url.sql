@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 02, 2022 at 09:18 PM
+-- Generation Time: Jan 03, 2022 at 05:03 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.21
 
@@ -45,8 +45,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL COMMENT 'ID пользователя',
   `login` varchar(50) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `avatar` varchar(100) NOT NULL DEFAULT 'noavatar.png' COMMENT 'аватар пользователя',
-  `total_views` int(11) DEFAULT NULL COMMENT 'кол-во переходов по ссылкам пользователя'
+  `avatar` varchar(100) NOT NULL DEFAULT 'noavatar.png' COMMENT 'аватар пользователя'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -75,13 +74,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `links`
 --
 ALTER TABLE `links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id ссылки', AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id ссылки', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID пользователя', AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID пользователя', AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

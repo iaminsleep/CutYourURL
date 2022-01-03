@@ -16,14 +16,14 @@
 
     foreach($blacklist as $row) {
       if(preg_match("/$row\$/i", $name)) {
-        return false;
+        $_SESSION['error'] = "Ошибка при загрузке аватара";
       }
     }
     if(($type !== "image/png") && ($type !== "image/jpg") && ($type !== "image/jpeg")) {
-      return false;
+      $_SESSION['error'] = "Ошибка при загрузке аватара";
     }
     if($size > 5 * 1024 * 1024) {
-      return false;
+      $_SESSION['error'] = "Ошибка при загрузке аватара";
     }
     else {
       delete_avatar($currentAvatar);

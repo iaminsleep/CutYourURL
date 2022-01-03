@@ -87,7 +87,6 @@ function get_link_info($url) { //данные получают из метода
 function upd_link_views($url) {
   if(empty($url)) return false;
   db_query("UPDATE `links` SET `views` = `views` + 1 WHERE `short_link` = '$url';", true);
-  db_query("UPDATE `users` SET `total_views` = `total_views` + 1;", true);
 }
 
 /****************************************************
@@ -266,7 +265,7 @@ function edit_link($linkId, $modifiedLink) {
 *****************************************************/
 
 function get_users() {
-  return db_query("SELECT * FROM `users` ORDER BY `users`.`total_views` DESC")->fetchAll();
+  return db_query("SELECT `users`.`id`, `users`.`login`, SUM(`links`.`views`) FROM `users` JOIN `links` ON `links`.`user_id` = `users`.`id` GROUP BY `users`.`id`, `users`.`login` ORDER BY SUM(`links`.`views`) DESC")->fetchAll();
 }
 
 function get_users_links_count($userId) {
@@ -274,7 +273,7 @@ function get_users_links_count($userId) {
 }
 
 function get_users_views_count($userId) {
-  $viewsCount = db_query("SELECT `total_views` FROM `users` WHERE `id` = $userId;")->fetchColumn(); 
+  $viewsCount = db_query("SELECT SUM(`views`) FROM `links` WHERE `user_id` = $userId;")->fetchColumn(); 
   if(empty($viewsCount)) {
     return 0;
   }
@@ -294,10 +293,7 @@ function get_user_avatar($userId) {
 }
 
 function delete_avatar($currentAvatar) {
-  if(file_exists("../img/avatars/noavatar")) {
-    exit();
-  }
-  else if(file_exists("../img/avatars/".$currentAvatar)) {
+  if(file_exists("../img/avatars/".$currentAvatar) && $currentAvatar !== 'noavatar.png') {
     unlink("../img/avatars/".$currentAvatar);
   }
 }

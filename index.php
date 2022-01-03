@@ -27,6 +27,12 @@
 					<h2 class="text-center">Необходимо <a href="<?php echo get_url("register.php");?>">зарегистрироваться</a> или <a href="<?php echo get_url('login.php');?>">войти</a> под своей учетной записью</h2>
 				</div>
 			</div>
+			<?php else: ?>
+				<div class="row mt-5">
+				<div class="col">
+					<h1 class="text-center" style="color: lightgreen">Добро пожаловать на сервис сокращения ссылок Cut Your URL!</h1>
+				</div>
+			</div>
 		<?php endif; ?>
 		<div class="row mt-5">
 			<div class="col">
