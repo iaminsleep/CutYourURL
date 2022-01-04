@@ -1,0 +1,34 @@
+.btn.btn-primary {
+  background-color: mediumpurple;
+  border-color: rebeccapurple;
+}
+
+.btn.btn-primary:focus {
+  box-shadow: 0 0 0 0.25rem rgb(177 49 253 / 50%);
+}
+
+.admin {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+}
+
+.admin-block {
+  text-align: center;
+}
+
+.admin-link {
+  text-decoration: none;
+}
+
+.admin-link.second {
+  color: crimson;
+}
+
+.admin-link.second:hover {
+  color: rgb(196, 44, 74);
+}
+
+.img {
+  height: 400px;
+}
