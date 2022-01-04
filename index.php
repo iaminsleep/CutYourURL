@@ -30,7 +30,7 @@
 			<?php else: ?>
 				<div class="row mt-5">
 				<div class="col">
-					<h1 class="text-center" style="color: lightblue">Добро пожаловать на сервис сокращения ссылок Cut Your URL!</h1>
+					<h1 class="text-center" style="color: lightblue">Добро пожаловать на сервис по сокращению ссылок Cut Your URL!</h1>
 				</div>
 			</div>
 		<?php endif; ?>

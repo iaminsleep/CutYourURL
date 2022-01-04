@@ -18,10 +18,10 @@
 		<?php show_alert_messages($errorMessage, $successMessage); ?>
 		<div style="margin-top: 30px; display: flex; flex-direction: row;">
 			<div>
-				<?php if(file_exists("img/avatars/".$avatar)): ?>
+				<?php if(file_exists("img/avatars/".$avatar) && $avatar !== 'noavatar.png'): ?>
 					<form action="actions/delete_avatar.php" method="post">
 						<img src="img/avatars/<?php echo $avatar?>" width="256" height="256" style="position: absolute;" alt="Аватар пользователя <?php echo $user['login']?>">
-						<button class="btn-close" type="submit" name="delete_avatar" style="position: absolute; margin-left: 230px;"></button>
+						<button class="btn-close" type="submit" title="Удалить аватар" name="delete_avatar" style="position: absolute; margin-left: 230px;"></button>
 					</form>
 				<?php else: ?>
 					<img src="img/avatars/noavatar.png" width="256" height="256" alt="noavatar" style="position: absolute;">

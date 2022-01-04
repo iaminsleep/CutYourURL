@@ -11,5 +11,8 @@
   const DB_USER = 'root';
   const DB_PASS = 'phpuser420';
 
+  const ADMIN_LOGIN = 'admin';
+  const ADMIN_PASSW = 'AdminPHP111';
+
   /* важная команда, благодаря ней стартует сессия и туда можно записывать данные */
   session_start();

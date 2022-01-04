@@ -2,51 +2,7 @@
 
 require_once('config.php');
 
-/****************************************************
-*****************************************************
-*Дефолтные функции, которые используются повсеместно*
-*****************************************************
-*****************************************************/
-
-function get_url($page = '') {
-  return HOST . "/$page";
-}
-
-function db() {
-  try {
-    /* подключение к базе данных */
-    $db = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NAME.";charset=utf8", DB_USER, DB_PASS, [
-      PDO::ATTR_EMULATE_PREPARES => false,
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
-    return $db;
-  }
-
-  catch(PDOException $e) {
-    die($e->getMessage()); /* завершает выполнение текущего скрипта */
-  }
-}
-
-/* query возвращает данные из базы данных */
-function db_query($sql = '', $exec = false) {
-  if(empty($sql)) return false;
-
-  if($exec) {
-    /* exec же, в свою очередь, выполняет операции с базой данных,
-    такие как удаление, обновление, вставку данных. */
-    $statement = db()->exec($sql);
-  } else {
-    $statement = db()->query($sql);
-  }
-  return $statement;
-}
-
-//функция редиректа, которая значительно облегчает верстку
-function redirect($location = '') {
-    header("Location: ".get_url($location)); //если значение пустое, перекидывает на главную страницу
-    die;
-}
+require_once('default_functions.php');
 
 /****************************************************
 *****************************************************
@@ -174,6 +130,8 @@ function register_user($authData) {
 *****************************************************/
 
 $isAuth = isset($_SESSION['user']['id']);
+$isAdmin = isset($_SESSION['isAdmin']);
+
 $userName = $_SESSION['user']['login'];
 
 function login($authData) {
@@ -182,12 +140,19 @@ function login($authData) {
   $_SESSION['error'] = 'Логин или пароль не может быть пустым!';
 
   $user = get_user_info($authData['login']);
-  if(empty($user)) {
+
+  if($authData['login'] === ADMIN_LOGIN && $authData['password'] === ADMIN_PASSW) {
+    $_SESSION['isAdmin'] = true;
+    $_SESSION['success'] = 'Добро пожаловать в админку.';
+    redirect('admin.php');
+  }
+
+  else if(empty($user)) {
     $_SESSION['error'] = 'Пользователь '.$authData['login'].' не был найден в системе!';
     redirect('login.php');
   }
 
-  if(password_verify($authData['password'], $user['password'])) {
+  else if(password_verify($authData['password'], $user['password'])) {
     $_SESSION['user'] = $user;
     $_SESSION['success'] = 'Вы успешно вошли в систему.';
     redirect('profile.php');
