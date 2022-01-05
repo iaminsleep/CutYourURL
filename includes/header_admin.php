@@ -7,6 +7,8 @@
 					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 		<link rel="icon" type="image/png" href="../img/icons/admin-icon.png">
 		<link rel="stylesheet" href="../css/admin.css">
 		<title>Админка сайта</title>
@@ -34,7 +36,7 @@
 						</ul>
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 							<li class="nav-item">
-								<a href="<?php echo get_url('../admin/actions/admin_logout.php');?>" class="btn btn-primary">Выйти</a>
+								<a href="<?php echo get_url('../admin/actions/admin-logout.php');?>" class="btn btn-primary">Выйти</a>
 							</li>
 						</ul>
 					</div>

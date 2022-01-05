@@ -7,7 +7,6 @@
 ?>
 
 <main class="container">
-  <?php show_alert_messages($errorMessage, $successMessage); ?>
   <div class="admin">
     <div class="admin-block">
       <a class="admin-link" href="admin/manage_links.php">
