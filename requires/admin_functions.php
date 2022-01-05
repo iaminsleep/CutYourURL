@@ -33,11 +33,9 @@
   $_SESSION['success'] = 'Ссылка успешно отредактирована.';
   return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = $linkId;");
 }
-
+  
 function getLinkInfo($url) { //данные получают из метода GET
   if(empty($url)) return [];
   /* просто fetch, потому что мы всё равно получим только одну строку */
   return db_query("SELECT * FROM `links` WHERE `long_link` = '$url';")->fetch();
 }
-
-  

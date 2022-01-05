@@ -1,5 +1,8 @@
 <?php
   require_once '../requires/admin_functions.php'; 
+
+  if(!$isAdmin) redirect();
+ 
   include_once '../includes/header_admin.php';
 
   $errorMessage = get_messages('error');
@@ -29,10 +32,10 @@
             <th scope="row"><?php echo $index + 1?></th>
             <td><a href="<?php echo $link['long_link']?>" target="_blank"><?php echo $link['long_link']?></a></td>
             <td><?php echo get_url($link['short_link'])?></td>
-            <td><?php echo $link['views']?></td>
+            <td><a href="<?php echo get_url('admin/user_page.php?id='.$link['user_id'])?>" class="btn btn-primary" title="Профиль пользователя">Профиль</a></td>
             <td>
-              <a href="<?php echo get_url('admin/edit_link.php?link='.$link['long_link'])?>" class="btn btn-warning btn-sm" title="Редактировать ссылку"><i class="bi bi-pencil"></i></a>
-              <a href="<?php echo get_url('admin/actions/delete-link.php?id='.$link['id'])?>" class="btn btn-danger btn-sm" title="Удалить ссылку"><i class="bi bi-trash"></i></a>
+              <a href="<?php echo get_url('admin/edit_link.php?link='.$link['long_link'])?>" class="btn btn-primary btn-sm" title="Редактировать ссылку"><i class="bi bi-pencil"></i></a>
+              <a href="<?php echo get_url('admin/actions/delete-link.php?id='.$link['id'])?>" class="btn btn-primary btn-sm" title="Удалить ссылку"><i class="bi bi-trash"></i></a>
             </td>
           </tr>
         <?php endforeach; }?>

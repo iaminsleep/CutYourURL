@@ -1,5 +1,8 @@
 <?php
   require_once 'requires/admin_functions.php';
+
+  if(!$isAdmin) redirect();
+  
   include_once 'includes/header_admin.php';
 
   $errorMessage = get_messages('error');

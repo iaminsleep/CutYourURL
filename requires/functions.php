@@ -220,7 +220,7 @@ function edit_link($linkId, $modifiedLink) {
   if(empty($linkId) || empty($modifiedLink)) return false;
 
   $_SESSION['success'] = 'Ссылка успешно отредактирована.';
-  return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = $linkId;");
+  return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = $linkId AND `user_id` = '".$_SESSION['user']['id']."'");
 }
 
 /****************************************************

@@ -16,4 +16,4 @@
     }
   }
 
-  redirect('admin/manage_links.php');
+  redirect($_POST['redirect_after']);
