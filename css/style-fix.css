@@ -2,3 +2,7 @@
   color: #dee2e6e3;
   --bs-table-striped-color: #ffffff;
 }
+
+.table-striped > tbody > tr:nth-of-type(2n + 1) > * {
+  color: #dee2e6e3;
+}

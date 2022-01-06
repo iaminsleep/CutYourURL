@@ -129,7 +129,7 @@ function register_user($authData) {
 *****************************************************
 *****************************************************/
 
-$isAuth = isset($_SESSION['user']['id']);
+$isAuth = isset($_SESSION['user']['id']) && get_user_info($_SESSION['user']['login']);
 $isAdmin = isset($_SESSION['isAdmin']);
 
 $userName = $_SESSION['user']['login'];

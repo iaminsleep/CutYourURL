@@ -14,6 +14,7 @@
 ?>
 	<main class="container">
 		<?php show_alert_messages($errorMessage, $successMessage); ?>
+		<a href="javascript:history.back()" class="btn btn-primary" title="Назад" style="margin-top: 20px;">Назад</a>
 		<div style="margin-top: 30px; display: flex; flex-direction: row; align-items: center;">
 			<div>
 				<?php if(file_exists("../img/avatars/".$avatar) && $avatar !== 'noavatar.png'): ?>
@@ -23,6 +24,7 @@
 				<?php endif; ?>
 			</div>
 			<h3 style="padding-left: 15px;">Профиль пользователя <span style="color: lightblue"><?php echo $user['login']?></span></h3>
+			<a href="<?php echo get_url('admin/actions/delete-avatar.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить аватар" onclick="return  confirm('Вы уверены, что аватар <?php echo $user['login']?> нарушает политику сайта?')">Удалить аватар</a>
 		</div>
 		<div class="row mt-5">
 			<table class="table table-striped">
@@ -37,7 +39,7 @@
 				</thead>
 				<tbody>
 					<?php if(empty($links)) { ?>
-						<p>Пользователь не создавал ссылки.</p>
+						<p>У пользователя отсутствуют ссылки на данный момент.</p>
 					<?php } else { foreach ($links as $index => $link): ?> <!-- Такой мув позволяет выводить порядковый индекс ссылки, т.к id ссылок бывает разным -->
 						<tr>
               <th scope="row"><?php echo $index + 1?></th>

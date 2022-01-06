@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 		<link rel="icon" type="image/png" href="../img/icons/admin-icon.png">
 		<link rel="stylesheet" href="../css/admin.css">
+		<link rel="stylesheet" href="../css/style-fix.css">
 		<title>Админка сайта</title>
 	</head>
 	<body style="background: #121212; color: #FFFFFF">

@@ -44,9 +44,9 @@
               <?php echo $user['login']?>
             </td>
             <td class="actions">
-              <a href="<?php echo get_url('admin/edit_link.php?link='.$link['long_link'])?>" class="btn btn-primary" title="Удалить аватар">Удалить аватар</a>
+              <a href="<?php echo get_url('admin/actions/delete-avatar.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить аватар" onclick="return  confirm('Вы уверены, что аватар <?php echo $user['login']?> нарушает политику сайта?')">Удалить аватар</a>
               <a href="<?php echo get_url('admin/user_page.php?id='.$user['id'])?>" class="btn btn-primary" title="Посмотреть ссылки">Посмотреть ссылки</a>
-              <a href="<?php echo get_url('admin/edit_link.php?link='.$link['long_link'])?>" class="btn btn-primary" title="Удалить пользователя">Удалить пользователя</a>
+              <a href="<?php echo get_url('admin/actions/delete-user.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить пользователя" onclick="return  confirm('Вы уверены, что хотите удалить пользователя <?php echo $user['login']?>?')">Удалить пользователя</a>
             </td>
           </tr>
         <?php endforeach; }?>

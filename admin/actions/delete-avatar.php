@@ -13,7 +13,7 @@
   }
 
   else {
-    deleteLink($_GET['id']);
+    deleteAvatar($_GET['id']);
   }
 
   redirect($previousPage);

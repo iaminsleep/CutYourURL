@@ -13,7 +13,7 @@
   }
 
   else {
-    deleteLink($_GET['id']);
+    deleteUser($_GET['id']);
   }
 
   redirect($previousPage);
