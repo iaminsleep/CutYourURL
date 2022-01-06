@@ -7,6 +7,9 @@
 ?>
 <main class="container">
 		<div class="row mt-5">
+			<?php if(empty($users)) { ?>
+				<p class="text-center">Ещё никто не зарегистрировался на нашем сайте. Станьте первым!</p>
+			<?php } else { ?>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -17,9 +20,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if(empty($users)) { ?>
-						<p>Ещё никто не зарегистрировался на нашем сайте. Станьте первым!</p>
-					<?php } else { foreach ($users as $index => $user): 
+					<?php foreach ($users as $index => $user): 
 						$avatar = get_user_avatar($user['id']);
 						if(!file_exists("img/avatars/$avatar"))
 							$avatar = 'noavatar.png';

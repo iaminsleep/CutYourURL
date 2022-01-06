@@ -14,6 +14,9 @@
   <?php show_alert_messages($errorMessage, $successMessage); ?>
   <a href="javascript:history.back()" class="btn btn-primary" title="Назад" style="margin-top: 20px;">Назад</a>
   <div class="row mt-5" style="margin-top: 2rem!important;">
+    <?php if(empty($links)) { ?>
+      <p class="text-center">Ссылки удалены или ещё не были созданы!</p>
+    <?php } else { ?>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -25,9 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        <?php if(empty($links)) { ?>
-          <p>Ссылки удалены или ещё не были созданы!</p>
-        <?php } else { foreach ($links as $index => $link): ?>
+        <?php foreach ($links as $index => $link): ?>
           <tr>
             <th scope="row"><?php echo $index + 1?></th>
             <td><a href="<?php echo $link['long_link']?>" target="_blank"><?php echo $link['long_link']?></a></td>

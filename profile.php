@@ -1,7 +1,10 @@
 <?php 
 	require_once 'requires/functions.php';
 
-	if(!$isAuth) redirect();
+	if(!$isAuth) {
+		redirect();
+		session_destroy();
+	};
 
 	$errorMessage = get_messages('error');
 	$successMessage = get_messages('success');
@@ -29,12 +32,15 @@
 				<form action="actions/upload_avatar.php" method="post" enctype="multipart/form-data" style="margin-top: 300px; display: flex; flex-direction: column">
 					<input type="file" name="avatar">
 					<button type="submit" name="set_avatar" class="btn btn-primary" style="margin-top: 10px;
-    margin-right: 150px;">Загрузить аватар</button>
+		margin-right: 150px;">Загрузить аватар</button>
 				</form>
 			</div>
 			<h3><?php echo $user['login']?></h3>
 		</div>
 		<div class="row mt-5">
+			<?php if(empty($links)) { ?>
+				<p class="text-center">Здесь пока что пусто. Создайте свою первую ссылку!</p>
+			<?php } else { ?>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -46,9 +52,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if(empty($links)) { ?>
-						<p>Здесь пока что пусто. Создайте свою первую ссылку!</p>
-					<?php } else { foreach ($links as $index => $link): ?> <!-- Такой мув позволяет выводить порядковый индекс ссылки, т.к id ссылок бывает разным -->
+					<?php foreach ($links as $index => $link): ?>
 						<tr>
 							<th scope="row"><?php echo $index + 1?></th> <!-- +1 нужен т.к элементы в массиве начинаются с нуля -->
 							<td><?php echo $link['long_link']?></td>

@@ -10,11 +10,11 @@
   }
 
   function getAllLinks() {
-    return db_query("SELECT * FROM `links`");
+    return db_query("SELECT * FROM `links`")->fetchAll();
   }
 
   function getAllUsers() {
-    return db_query("SELECT * FROM `users`");
+    return db_query("SELECT * FROM `users`")->fetchAll();
   }
   
   function deleteLink($linkId) {

@@ -21,6 +21,9 @@
   <?php show_alert_messages($errorMessage, $successMessage); ?>
   <a href="javascript:history.back()" class="btn btn-primary" title="Назад" style="margin-top: 20px;">Назад</a>
   <div class="row mt-5" style="margin-top: 2rem!important;">
+    <?php if(empty($users)) { ?>
+      <p class="text-center">Ещё никто не зарегестрировался на вашем сайте!</p>
+    <?php } else { ?>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -30,13 +33,10 @@
         </tr>
       </thead>
       <tbody>
-        <?php if(empty($users)) { ?>
-          <p>Ещё никто не зарегестрировался на вашем сайте!</p>
-        <?php } else { foreach ($users as $index => $user): 
-            $avatar = get_user_avatar($user['id']);
-						if(!file_exists("../img/avatars/$avatar"))
-							$avatar = 'noavatar.png';
-					?>
+        <?php foreach ($users as $index => $user): 
+          $avatar = get_user_avatar($user['id']);
+          if(!file_exists("../img/avatars/$avatar")) $avatar = 'noavatar.png';
+        ?>
           <tr>
             <th scope="row"><?php echo $index + 1?></th>
             <td style="padding-left: 30px;">
@@ -44,9 +44,9 @@
               <?php echo $user['login']?>
             </td>
             <td class="actions">
-              <a href="<?php echo get_url('admin/actions/delete-avatar.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить аватар" onclick="return  confirm('Вы уверены, что аватар <?php echo $user['login']?> нарушает политику сайта?')">Удалить аватар</a>
+              <a href="<?php echo get_url('admin/actions/delete-avatar.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить аватар" onclick="return  confirm('Вы уверены, что аватар пользователя <?php echo $user['login']?> нарушает политику сайта?')">Удалить аватар</a>
               <a href="<?php echo get_url('admin/user_page.php?id='.$user['id'])?>" class="btn btn-primary" title="Посмотреть ссылки">Посмотреть ссылки</a>
-              <a href="<?php echo get_url('admin/actions/delete-user.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить пользователя" onclick="return  confirm('Вы уверены, что хотите удалить пользователя <?php echo $user['login']?>?')">Удалить пользователя</a>
+              <a href="<?php echo get_url('admin/actions/delete-user.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить пользователя" onclick="return confirm('Вы уверены, что хотите удалить пользователя <?php echo $user['login']?>?')">Удалить пользователя</a>
             </td>
           </tr>
         <?php endforeach; }?>

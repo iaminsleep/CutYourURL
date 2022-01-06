@@ -230,7 +230,13 @@ function edit_link($linkId, $modifiedLink) {
 *****************************************************/
 
 function get_users() {
-  return db_query("SELECT `users`.`id`, `users`.`login`, SUM(`links`.`views`) FROM `users` JOIN `links` ON `links`.`user_id` = `users`.`id` GROUP BY `users`.`id`, `users`.`login` ORDER BY SUM(`links`.`views`) DESC")->fetchAll();
+  $topUsers = db_query("SELECT `users`.`id`, `users`.`login`, SUM(`links`.`views`) FROM `users` JOIN `links` ON `links`.`user_id` = `users`.`id` GROUP BY `users`.`id`, `users`.`login` ORDER BY SUM(`links`.`views`) DESC")->fetchAll();
+  if(empty($topUsers)) {
+    return db_query("SELECT * FROM `users`")->fetchAll();
+  }
+  else {
+    return $topUsers;
+  }
 }
 
 function get_users_links_count($userId) {
