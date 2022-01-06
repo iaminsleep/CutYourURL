@@ -43,11 +43,18 @@ function getLinkInfo($url) { //данные получают из метода G
 function deleteAvatar($uid) {
   if(empty($uid)) return false;
 
+  $currentAvatar = get_user_avatar($uid);
+  if($currentAvatar !== 'noavatar.png' && file_exists("../../img/avatars/".$currentAvatar)) {
+    unlink("../../img/avatars/".$currentAvatar);
+  }
+
   return db_query("UPDATE `users` SET `avatar` = 'noavatar.png' WHERE `users`.`id` = $uid", true);
 }
 
 function deleteUser($uid) {
   if(empty($uid)) return false;
 
-  return db_query("DELETE FROM `users` WHERE `users`.`id` = $uid", true);
+  deleteAvatar($uid);
+  
+  return db_query("DELETE `users`,`links` FROM `users` JOIN `links` ON `links`.`user_id` = `users`.`id` WHERE `users`.`id` = $uid", true);
 }

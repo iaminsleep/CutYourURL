@@ -33,6 +33,9 @@
 			</div>			
 		</div>
 		<div class="row mt-5">
+			<?php if(empty($links)) { ?>
+				<p class="text-center">Пользователь ещё не создавал ссылки.</p>
+			<?php } else { ?>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -44,9 +47,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php if(empty($links)) { ?>
-						<p>На данный момент у пользователя отсутствуют ссылки.</p>
-					<?php } else { foreach ($links as $index => $link): ?> <!-- Такой мув позволяет выводить порядковый индекс ссылки, т.к id ссылок бывает разным -->
+					<?php foreach ($links as $index => $link): ?> <!-- Такой мув позволяет выводить порядковый индекс ссылки, т.к id ссылок бывает разным -->
 						<tr>
               <th scope="row"><?php echo $index + 1?></th>
                 <td><a href="<?php echo $link['long_link']?>" target="_blank"><?php echo $link['long_link']?></a></td>

@@ -2,8 +2,8 @@
 	require_once 'requires/functions.php';
 
 	if(!$isAuth) {
-		redirect();
 		session_destroy();
+		redirect();
 	};
 
 	$errorMessage = get_messages('error');
