@@ -44,6 +44,13 @@
     </table>
   </div>
 </main>
+<button class="btn btn-primary btn-side" title="Открыть памятку для админа">Памятка</button>
+  <div id="popup" class="popup">
+    <span class="popup-close">&times;</span>
+    <h2>Modal Title</h2>
+    <p class="description">Modal Description</p>
+  </div>
+  <script src="../js/modal.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
 </body>

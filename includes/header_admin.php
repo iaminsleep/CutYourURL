@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="../css/style-fix.css">
 		<title>Админка сайта</title>
 	</head>
-	<body style="background: #121212; color: #FFFFFF">
+	<body style="background: #121212; color: #FFFFFF; position: relative;">
 		<header>
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 				<div class="container">
