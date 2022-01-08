@@ -44,5 +44,5 @@
 			</div>
 		</div>
 	</main>
-<?php include 'includes/input.php'; ?>
+<script src="js/input.js"></script>
 <?php include 'includes/footer.php'; ?>

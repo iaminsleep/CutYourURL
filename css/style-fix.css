@@ -1,8 +1,27 @@
 .table {
   color: #dee2e6e3;
   --bs-table-striped-color: #ffffff;
+  border-color: #383d42 !important;
 }
 
 .table-striped > tbody > tr:nth-of-type(2n + 1) > * {
   color: #dee2e6e3;
+}
+
+.form-control {
+  background: #121212 !important;
+  color: white !important;
+  border: 1px solid #383d42 !important;
+}
+
+.alert-success {
+  color: #87d5a2 !important;
+  background-color: #23352d !important;
+  border-color: #264236 !important;
+}
+
+.alert-danger {
+  color: #ffa5a1 !important;
+  background-color: #452c2f !important;
+  border-color: #5c3339 !important;
 }
