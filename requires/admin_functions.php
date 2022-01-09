@@ -18,43 +18,50 @@
   }
   
   function deleteLink($linkId) {
-    if(empty($linkId)) return false;
+    if(filter_var($linkId, FILTER_VALIDATE_INT) === false || empty($linkId)) return $_SESSION['error'] = 'Произошла ошибка';
 
-    if (db_query("DELETE FROM `links` WHERE `links`.`id` = $linkId;", true)) {
-      $_SESSION['success'] = 'Ссылка успешно удалена.';
-    } else {
-      $_SESSION['error'] = 'Произошла ошибка';
-    }
+    return db_query("DELETE FROM `links` WHERE `links`.`id` = '$linkId';", true) 
+      ? $_SESSION['success'] = 'Ссылка успешно удалена.'
+      : $_SESSION['error'] = 'Произошла ошибка';
   }
 
   function editLink($linkId, $modifiedLink) {
-  if(empty($linkId) || empty($modifiedLink)) return false;
-
-  $_SESSION['success'] = 'Ссылка успешно отредактирована.';
-  return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = $linkId;", true);
+  if(filter_var($linkId, FILTER_VALIDATE_INT) === false || empty($linkId) || empty($modifiedLink)) return $_SESSION['error'] = 'Произошла ошибка';
+  
+  return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = '$linkId';", true)
+    ? $_SESSION['success'] = 'Ссылка успешно отредактирована.'
+    : $_SESSION['error'] = 'Произошла ошибка';
 }
   
-function getLinkInfo($url) { //данные получают из метода GET
-  if(empty($url)) return [];
+function getLinkInfo($linkId) { //данные получают из метода GET
+  if(empty($linkId)) return false;
   /* просто fetch, потому что мы всё равно получим только одну строку */
-  return db_query("SELECT * FROM `links` WHERE `long_link` = '$url';")->fetch();
+  return db_query("SELECT * FROM `links` WHERE `id` = '$linkId';")->fetch();
 }
 
 function deleteAvatar($uid) {
-  if(empty($uid)) return false;
+  if(filter_var($uid, FILTER_VALIDATE_INT) === false || empty($uid)) return $_SESSION['error'] = 'Произошла ошибка';
 
   $currentAvatar = get_user_avatar($uid);
+  
   if($currentAvatar !== 'noavatar.png' && file_exists("../../img/avatars/".$currentAvatar)) {
     unlink("../../img/avatars/".$currentAvatar);
+    return db_query("UPDATE `users` SET `avatar` = 'noavatar.png' WHERE `users`.`id` = '$uid';", true) 
+      ? $_SESSION['success'] = 'Аватар пользователя удалён.'
+      : $_SESSION['error'] = 'Возникла ошибка при попытке удалить аватар!';
   }
-
-  return db_query("UPDATE `users` SET `avatar` = 'noavatar.png' WHERE `users`.`id` = $uid", true);
 }
 
 function deleteUser($uid) {
-  if(empty($uid)) return false;
+  if(filter_var($uid, FILTER_VALIDATE_INT) === false || empty($uid)) return $_SESSION['error'] = 'Произошла ошибка';
 
   deleteAvatar($uid);
-  
-  return db_query("DELETE `users`,`links` FROM `users` JOIN `links` ON `links`.`user_id` = `users`.`id` WHERE `users`.`id` = $uid", true);
+  $userLinks = db_query("SELECT * FROM `links` WHERE `user_id` = '$uid';")->fetchAll(); /* не забываем про fetchAll */
+
+  if(empty($userLinks)) {
+    return db_query("DELETE FROM `users` WHERE `users`.`id` = '$uid';", true);
+  } 
+  else {
+    return db_query("DELETE `users`,`links` FROM `users` JOIN `links` ON `links`.`user_id` = `users`.`id` WHERE `users`.`id` = '$uid'", true);
+  }
 }

@@ -6,14 +6,14 @@
   
   $previousPage = str_replace("http://cut-your-url/", "", $_SERVER['HTTP_REFERER']);
 
-  /* если идентификатор не установлен, или ссылка пустая, перекидывает на страницу профиля */
-  if(!isset($_GET['id']) || empty($_GET['id'])) {
+  $userId = $_GET['id'];
+  
+  if(!isset($userId) || empty($userId)) {
     $_SESSION['error'] = 'Произошла ошибка';
-    redirect($previousPage);
   }
 
   else {
-    deleteLink($_GET['id']);
+    deleteLink($userId);
   }
 
   redirect($previousPage);

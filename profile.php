@@ -6,14 +6,16 @@
 		redirect();
 	};
 
+	$sessionUid = $_SESSION['user']['id'];
+
 	$errorMessage = get_messages('error');
 	$successMessage = get_messages('success');
 
-	$links = get_user_links($_SESSION['user']['id']);
+	$links = get_user_links($sessionUid);
 
-	$user = db_query("SELECT * FROM `users` WHERE `id` = '".$_SESSION['user']['id']."'")->fetch();
+	$user = db_query("SELECT * FROM `users` WHERE `id` = ".(int)$sessionUid)->fetch();
 
-	$avatar = get_user_avatar($_SESSION['user']['id']);
+	$avatar = get_user_avatar($sessionUid);
 
 	include_once 'includes/header_profile.php';
 ?>
@@ -60,8 +62,8 @@
 							<td><?php echo $link['views']?></td>
 							<td>
 								<button class="btn btn-primary btn-sm copy-btn" title="Скопировать в буфер" data-clipboard-text="<?php echo get_url($link['short_link'])?>"><i class="bi bi-files"></i></button>
-								<a href="<?php echo get_url('edit-link.php?link='.$link['short_link'])?>" class="btn btn-warning btn-sm" title="Редактировать"><i class="bi bi-pencil"></i></a>
-								<a href="<?php echo get_url('actions/delete_link.php?id='.$link['id'])?>" class="btn btn-danger btn-sm" title="Удалить"><i class="bi bi-trash"></i></a>
+								<a href="<?php echo get_url("edit-link.php?link=".$link['short_link'])?>" class="btn btn-warning btn-sm" title="Редактировать"><i class="bi bi-pencil"></i></a>
+								<a href="<?php echo get_url("actions/delete_link.php?id=".(int)$link['id'])?>" class="btn btn-danger btn-sm" title="Удалить"><i class="bi bi-trash"></i></a>
 							</td>
 						</tr>
 					<?php endforeach; }?>
@@ -69,16 +71,5 @@
 			</table>
 		</div>
 	</main>
-	<div aria-live="polite" aria-atomic="true" class="position-relative">
-		<div class="toast-container position-absolute top-0 start-50 translate-middle-x">
-			<div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="d-flex">
-					<div class="toast-body">
-						Ссылка скопирована в буфер
-					</div>
-					<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-				</div>
-			</div>
-		</div>
-	</div>
+	<?php include 'includes/toast.php'; ?>
 <?php include 'includes/footer_profile.php';?>

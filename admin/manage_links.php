@@ -33,10 +33,10 @@
             <th scope="row"><?php echo $index + 1?></th>
             <td><a href="<?php echo $link['long_link']?>" target="_blank"><?php echo $link['long_link']?></a></td>
             <td><?php echo get_url($link['short_link'])?></td>
-            <td><a href="<?php echo get_url('admin/user_page.php?id='.$link['user_id'])?>" class="btn btn-primary" title="Профиль пользователя">Профиль</a></td>
+            <td><a href="<?php echo get_url("admin/user_page.php?id=".(int)$link['user_id'])?>" class="btn btn-primary" title="Профиль пользователя">Профиль</a></td>
             <td>
-              <a href="<?php echo get_url('admin/edit_link.php?link='.$link['long_link'])?>" class="btn btn-primary btn-sm" title="Редактировать ссылку"><i class="bi bi-pencil"></i></a>
-              <a href="<?php echo get_url('admin/actions/delete-link.php?id='.$link['id'])?>" class="btn btn-primary btn-sm" title="Удалить ссылку"><i class="bi bi-trash"></i></a>
+              <a href="<?php echo get_url("admin/edit_link.php?link-id=".(int)$link['id'])?>" class="btn btn-primary btn-sm" title="Редактировать ссылку"><i class="bi bi-pencil"></i></a>
+              <a href="<?php echo get_url("admin/actions/delete-link.php?id=".(int)$link['id'])?>" class="btn btn-primary btn-sm" title="Удалить ссылку"><i class="bi bi-trash"></i></a>
             </td>
           </tr>
         <?php endforeach; }?>
@@ -45,12 +45,7 @@
   </div>
 </main>
 <button class="btn btn-primary btn-side" title="Открыть памятку для админа">Памятка</button>
-  <div id="popup" class="popup">
-    <span class="popup-close">&times;</span>
-    <h2>Modal Title</h2>
-    <p class="description">Modal Description</p>
-  </div>
-  <script src="../js/modal.js"></script>
+  <?php include_once '../includes/modal.php';?>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
 </body>

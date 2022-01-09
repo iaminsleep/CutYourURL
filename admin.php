@@ -29,12 +29,7 @@
     </div>
   </div>
   <button class="btn btn-primary btn-side" title="Открыть памятку для админа">Памятка</button>
-  <div id="popup" class="popup">
-    <span class="popup-close">&times;</span>
-    <h2>Modal Title</h2>
-    <p class="description">Modal Description</p>
-  </div>
-  <script src="js/modal.js"></script>
+  <?php include_once 'includes/modal.php';?>
 </main>
 
 <?php include_once 'includes/footer.php';?>

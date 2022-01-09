@@ -4,7 +4,7 @@
   if(!$isAuth) redirect();
 
   if(isset($_GET['link']) && !empty($_GET['link'])) {
-    $shortLink = $_GET['link'];
+    $shortLink = addslashes($_GET['link']);
     $link = get_link_info($shortLink);
 
     if(empty($link) || $link['user_id'] !== $_SESSION['user']['id']) {

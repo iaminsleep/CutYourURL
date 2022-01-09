@@ -169,19 +169,17 @@ function login($authData) {
 *****************************************************/
 
 function get_user_links($userId) {
-  if(empty($userId)) return [];
+  if(filter_var($userId, FILTER_VALIDATE_INT) === false || empty($userId)) return [];
   
-  return db_query("SELECT * FROM `links` WHERE `user_id` = $userId;")->fetchAll();
+  return db_query("SELECT * FROM `links` WHERE `user_id` = '$userId';")->fetchAll();
 }
 
 function delete_link($linkId) {
-  if(empty($linkId)) return false;
+  if(filter_var($linkId, FILTER_VALIDATE_INT) === false || empty($linkId)) return $_SESSION['error'] = 'Произошла ошибка';
 
-  if (db_query("DELETE FROM `links` WHERE `links`.`id` = $linkId AND `user_id` = '".$_SESSION['user']['id']."'", true)) {
-    $_SESSION['success'] = 'Ссылка успешно удалена.';
-  } else {
-    $_SESSION['error'] = 'Произошла ошибка';
-  }
+  return db_query("DELETE FROM `links` WHERE `links`.`id` = $linkId AND `user_id` = ".$_SESSION['user']['id'], true)
+   ? $_SESSION['success'] = 'Ссылка успешно удалена.' 
+   : $_SESSION['error'] = 'Произошла ошибка';
 }
 
 /* Два вида генерации ссылок, первый вариант генерирует без повторения букв, что делает ссылку менее уникальной */
@@ -204,7 +202,7 @@ function generate_link_complex($size = 10) {
 }
 
 function add_link($userId, $link) {
-  if($userId == $_SESSION['user']['id']) {
+  if(filter_var($userId, FILTER_VALIDATE_INT) && $userId == $_SESSION['user']['id']) {
     $shortLink = generate_link_complex();
 
     $_SESSION['success'] = 'Ссылка успешно добавлена.';
@@ -217,10 +215,10 @@ function add_link($userId, $link) {
 }
 
 function edit_link($linkId, $modifiedLink) {
-  if(empty($linkId) || empty($modifiedLink)) return false;
-
-  $_SESSION['success'] = 'Ссылка успешно отредактирована.';
-  return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = $linkId AND `user_id` = '".$_SESSION['user']['id']."'");
+  if(filter_var($linkId, FILTER_VALIDATE_INT) === false || empty($linkId) || empty($modifiedLink)) return $_SESSION['error'] = 'Произошла ошибка';
+  return db_query("UPDATE `links` SET `long_link` = '$modifiedLink' WHERE `links`.`id` = '$linkId' AND `links`.`user_id` = ".$_SESSION['user']['id'], true) 
+    ? $_SESSION['success'] = 'Ссылка успешно отредактирована.'
+    : $_SESSION['error'] = 'Произошла ошибка';
 }
 
 /****************************************************
@@ -240,11 +238,11 @@ function get_users() {
 }
 
 function get_users_links_count($userId) {
-  return db_query("SELECT COUNT(id) FROM `links` WHERE `user_id` = $userId;")->fetchColumn(); 
+  return db_query("SELECT COUNT(id) FROM `links` WHERE `user_id` = '$userId';")->fetchColumn(); 
 }
 
 function get_users_views_count($userId) {
-  $viewsCount = db_query("SELECT SUM(`views`) FROM `links` WHERE `user_id` = $userId;")->fetchColumn(); 
+  $viewsCount = db_query("SELECT SUM(`views`) FROM `links` WHERE `user_id` = '$userId';")->fetchColumn(); 
   if(empty($viewsCount)) {
     return 0;
   }
@@ -260,14 +258,14 @@ function get_users_views_count($userId) {
 *****************************************************/
 
 function get_user_avatar($userId) {
-  return db_query("SELECT `avatar` FROM `users` WHERE `id` = $userId")->fetchColumn();
+  return db_query("SELECT `avatar` FROM `users` WHERE `id` = '$userId';")->fetchColumn();
 }
 
 function delete_avatar($currentAvatar) {
   if($currentAvatar !== 'noavatar.png' && file_exists("../img/avatars/".$currentAvatar)) {
     unlink("../img/avatars/".$currentAvatar);
   }
-  return db_query("UPDATE `users` SET `avatar` = 'noavatar.png' WHERE `users`.`id` = '".$_SESSION['user']['id']."'", true);
+  return db_query("UPDATE `users` SET `avatar` = 'noavatar.png' WHERE `users`.`id` = ".$_SESSION['user']['id'], true);
 }
 
 function upload_avatar($userId, $file) {
@@ -276,7 +274,7 @@ function upload_avatar($userId, $file) {
   $dir = '../img/avatars/';
   $fullPath = $dir.$name;
 
-  if(move_uploaded_file($file['tmp_name'], $fullPath) && db_query("UPDATE `users` SET `avatar` = '".$name."' WHERE `users`.`id` = $userId;", true)) {
+  if(move_uploaded_file($file['tmp_name'], $fullPath) && db_query("UPDATE `users` SET `avatar` = '$name' WHERE `users`.`id` = '$userId';", true)) {
     $_SESSION['success'] = "Аватар успешно загружен";
   }
   else {

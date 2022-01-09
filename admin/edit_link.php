@@ -6,9 +6,9 @@
 
 	$previousPage = str_replace("http://cut-your-url/", "", $_SERVER['HTTP_REFERER']);
 
-  if(isset($_GET['link']) && !empty($_GET['link'])) {
-    $longLink = $_GET['link'];
-    $link = getLinkInfo($longLink);
+  if(isset($_GET['id']) && !empty($_GET['id'])) {
+    $linkId = addslashes($_GET['id']);
+    $link = getLinkInfo($linkId);
 
     if(empty($link)) {
       $_SESSION['error'] = 'Произошла ошибка';

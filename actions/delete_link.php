@@ -3,13 +3,14 @@
 
   if(!$isAuth) redirect(); /* данное действие могут выполнять только авторизированные пользователи */
   
+  $userId = $_GET['id'];
   /* если идентификатор не установлен, или ссылка пустая, перекидывает на страницу профиля */
-  if(!isset($_GET['id']) || empty($_GET['id'])) {
+  if(!isset($userId) || empty($userId)) {
     redirect('profile.php');
   }
 
   else {
-    delete_link($_GET['id']);
+    delete_link($userId);
   }
 
   redirect('profile.php');

@@ -44,9 +44,9 @@
               <?php echo $user['login']?>
             </td>
             <td class="actions">
-              <a href="<?php echo get_url('admin/actions/delete-avatar.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить аватар" onclick="return  confirm('Вы уверены, что аватар пользователя <?php echo $user['login']?> нарушает политику сайта?')">Удалить аватар</a>
-              <a href="<?php echo get_url('admin/user_page.php?id='.$user['id'])?>" class="btn btn-primary" title="Посмотреть ссылки">Посмотреть ссылки</a>
-              <a href="<?php echo get_url('admin/actions/delete-user.php?id='.$user['id'])?>" class="btn btn-primary" title="Удалить пользователя" onclick="return confirm('Вы уверены, что хотите удалить пользователя <?php echo $user['login']?>?')">Удалить пользователя</a>
+              <a href="<?php echo get_url("admin/actions/delete-avatar.php?id=".(int)$user['id'])?>" class="btn btn-primary" title="Удалить аватар" onclick="return confirm('Вы уверены, что аватар пользователя <?php echo $user['login']?> нарушает политику сайта?')">Удалить аватар</a>
+              <a href="<?php echo get_url("admin/user_page.php?id=".(int)$user['id'])?>" class="btn btn-primary" title="Посмотреть ссылки">Посмотреть ссылки</a>
+              <a href="<?php echo get_url("admin/actions/delete-user.php?id=".(int)$user['id'])?>" class="btn btn-primary" title="Удалить пользователя" onclick="return confirm('Вы уверены, что хотите удалить пользователя <?php echo $user['login']?>?')">Удалить пользователя</a>
             </td>
           </tr>
         <?php endforeach; }?>
@@ -55,12 +55,7 @@
   </div>
 </main>
 <button class="btn btn-primary btn-side" title="Открыть памятку для админа">Памятка</button>
-  <div id="popup" class="popup">
-    <span class="popup-close">&times;</span>
-    <h2>Modal Title</h2>
-    <p class="description">Modal Description</p>
-  </div>
-  <script src="../js/modal.js"></script>
+  <?php include_once '../includes/modal.php';?>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
 </body>
