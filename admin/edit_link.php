@@ -30,7 +30,7 @@
 				<form action="<?php echo get_url("admin/actions/edit-link.php")?>" method="post">
 					<div class="mb-3">
 						<label for="link-input" class="form-label">Новая ссылка</label>
-						<input type="text" class="form-control is-valid" id="link-input" value="<?php echo $link['long_link'] ?>" required autocomplete="off" name="link">
+						<input type="text" class="form-control" id="link-input" value="<?php echo $link['long_link'] ?>" required autocomplete="off" name="link">
 					</div>
           <input type="hidden" name="link-id" value="<?php echo $link['id']?>">
           <input type="hidden" name="redirect_after" value="<?php echo $previousPage ?>">

@@ -35,7 +35,7 @@
             <td><?php echo get_url($link['short_link'])?></td>
             <td><a href="<?php echo get_url("admin/user_page.php?id=".(int)$link['user_id'])?>" class="btn btn-primary" title="Профиль пользователя">Профиль</a></td>
             <td>
-              <a href="<?php echo get_url("admin/edit_link.php?link-id=".(int)$link['id'])?>" class="btn btn-primary btn-sm" title="Редактировать ссылку"><i class="bi bi-pencil"></i></a>
+              <a href="<?php echo get_url("admin/edit_link.php?id=".(int)$link['id'])?>" class="btn btn-primary btn-sm" title="Редактировать ссылку"><i class="bi bi-pencil"></i></a>
               <a href="<?php echo get_url("admin/actions/delete-link.php?id=".(int)$link['id'])?>" class="btn btn-primary btn-sm" title="Удалить ссылку"><i class="bi bi-trash"></i></a>
             </td>
           </tr>
