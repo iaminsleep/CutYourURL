@@ -4,7 +4,7 @@
 
   if(!$isAdmin) redirect(); /* данное действие могут выполнять только админы */
   
-  $previousPage = str_replace("http://cut-your-url/", "", $_SERVER['HTTP_REFERER']);
+  $previousPage = $_SERVER['HTTP_REFERER'];
 
   $userId = $_GET['id'];
   
@@ -16,4 +16,4 @@
     deleteLink($userId);
   }
 
-  redirect($previousPage);
+  redirectTo($previousPage);

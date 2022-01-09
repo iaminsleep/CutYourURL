@@ -18,4 +18,4 @@
     }
   }
 
-  redirect($previousPage);
+  redirectTo($previousPage);

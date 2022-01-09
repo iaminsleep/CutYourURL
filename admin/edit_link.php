@@ -4,7 +4,7 @@
 
   if(!$isAdmin) redirect();
 
-	$previousPage = str_replace("http://cut-your-url/", "", $_SERVER['HTTP_REFERER']);
+	$previousPage = $_SERVER['HTTP_REFERER'];
 
   if(isset($_GET['id']) && !empty($_GET['id'])) {
     $linkId = addslashes($_GET['id']);

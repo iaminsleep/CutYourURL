@@ -9,6 +9,11 @@
     redirect();
   }
 
+  function redirectTo($location) {
+    header("Location: ".$location); //если значение пустое, перекидывает на главную страницу
+    die;
+  }
+
   function getAllLinks() {
     return db_query("SELECT * FROM `links`")->fetchAll();
   }

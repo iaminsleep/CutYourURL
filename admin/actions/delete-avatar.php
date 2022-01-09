@@ -4,7 +4,7 @@
 
   if(!$isAdmin) redirect(); /* данное действие могут выполнять только админы */
   
-  $previousPage = str_replace("http://cut-your-url/", "", $_SERVER['HTTP_REFERER']);
+  $previousPage = $_SERVER['HTTP_REFERER'];
 
   /* если идентификатор не установлен, или ссылка пустая, перекидывает на страницу профиля */
   if(!isset($_GET['id']) || empty($_GET['id'])) {
@@ -15,4 +15,4 @@
     deleteAvatar($_GET['id']);
   }
 
-  redirect($previousPage);
+  redirectTo($previousPage);
