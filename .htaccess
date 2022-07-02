@@ -6,9 +6,3 @@ RewriteRule ^([0-9A-Za-z-]+)/?$ /index.php?url=$1 [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^.]+)$ $1.php [NC,L]
-
-php_flag display_startup_errors off
-php_flag display_errors off
-php_flag html_errors off
-php_value docref_root 0
-php_value docref_ext 0
