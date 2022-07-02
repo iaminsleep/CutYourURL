@@ -1,8 +1,11 @@
 Options +FollowSymLinks -Indexes
 RewriteEngine On
 
-#RewriteRule ^(login|logout|profile)$ /$1.php [R=301,L]
+RewriteRule ^(login|logout|profile)$ /$1.php [R=301,L]
 RewriteRule ^([0-9A-Za-z-]+)/?$ /index.php?url=$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^.]+)$ $1.php [NC,L]
 
 php_flag display_startup_errors off
 php_flag display_errors off
