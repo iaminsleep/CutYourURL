@@ -1,18 +1,13 @@
 <?php
   //первый способ обявления переменных
   define ('SITE_NAME', "Cut Your URL");
-  define ('HOST', $_ENV['APP_URL']);
   define ('URL_CHARS', "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-");
 
-  //второй способ
-  const DB_HOST = $_ENV['DB_HOST'];
-  const DB_NAME = $_ENV['DB_NAME'];
+  require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/vendor/autoload.php');
 
-  const DB_USER = $_ENV['DB_USER'];
-  const DB_PASS = $_ENV['DB_PASS'];
-
-  const ADMIN_LOGIN = $_ENV['ADMIN_LOGIN'];
-  const ADMIN_PASSW = $_ENV['ADMIN_PASSW'];
+  // Looing for .env at the root directory
+  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+  $dotenv->load();
 
   /* важная команда, благодаря ней стартует сессия и туда можно записывать данные */
   session_start();

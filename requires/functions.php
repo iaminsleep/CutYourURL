@@ -132,8 +132,6 @@ function register_user($authData) {
 $isAuth = isset($_SESSION['user']['id']) && get_user_info($_SESSION['user']['login']);
 $isAdmin = isset($_SESSION['isAdmin']);
 
-$userName = $_SESSION['user']['login'];
-
 function login($authData) {
   if(empty($authData) || !isset($authData['login']) || empty($authData['login'])
     || !isset($authData['password']) || empty($authData['password']))
@@ -141,7 +139,7 @@ function login($authData) {
 
   $user = get_user_info($authData['login']);
 
-  if($authData['login'] === ADMIN_LOGIN && $authData['password'] === ADMIN_PASSW) {
+  if($authData['login'] === $_ENV['ADMIN_LOGIN'] && $authData['password'] === $_ENV['ADMIN_PASSW']) {
     $_SESSION['isAdmin'] = true;
     $_SESSION['success'] = 'Добро пожаловать в админку.';
     redirect('admin.php');

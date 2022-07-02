@@ -36,7 +36,7 @@
 					</ul>
 					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 						<?php if($isAuth): ?>
-							<span style="display: flex; align-items: center; padding-right: 10px;">Здравствуйте, <?php echo $userName ?></span>
+							<span style="display: flex; align-items: center; padding-right: 10px;">Здравствуйте, <?php echo $_SESSION['user']['login'] ?></span>
 						<?php endif; ?>
 						<li class="nav-item">
 							<?php if($isAuth) { ?>
