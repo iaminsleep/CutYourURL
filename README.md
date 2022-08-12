@@ -1,13 +1,18 @@
-# Сервис по сокращению ссылок "Cut Your URL"
-Сайт написан на языке php, используется база данных MySQL Проверка полей при вводе, копирование ссылок в буфер обмена и модальное окно реализованы на Javascript.
+# Link shortening service "Cut Your URL"
+The site is written in php, with the use of MySQL database. Features such as input field check when typing, link copying to the clipboard and a modal window are implemented in Javascript.
 
-### Особенности:
-- защита от SQL-инъекций
-- админка (логин и пароль можно изменить в файле .env)
-- генерация ссылок
-- возможность загрузить свою аватарку в профиль
-- топ пользователей
+### Features:
+- protection against SQL injections
+- admin panel (login and password can be changed in the file .env)
+- link generation
+- the ability to upload your avatar to your profile
+- top users
 
-### Хостинг
-Сайт размещён на бесплатном хостинге от Heroku</br>
+### How to launch the project
+1) Download OpenServer
+2) Download project and extract the zip archive inside OpenServer's 'domains' folder
+3) Launch OpenServer and the project 
+
+### Hosting
+The site is hosted on free hosting from Heroku</br>
 https://cut-your-url-ru.herokuapp.com/
